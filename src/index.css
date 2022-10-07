@@ -1,13 +1,345 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*, body {
+    font-family: Roboto;
+    overflow-y: hidden;
+    background: #FFFFFF;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root, body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.form__title {
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 100%;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    color: #202020;
+
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 5px;
+    margin-left: 8px;
+}
+
+.form__input {
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 0.5px solid #7B8794;
+    border-radius: 8px;
+    height: 48px;
+    text-indent: 13px;
+    width: 100%;
+}
+
+.form__input::placeholder {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+
+    color: #202020;
+
+    opacity: 0.2;
+}
+
+.form__input:focus {
+    outline: none;
+    border: 1px solid #2F80ED;
+    border-radius: 8px;
+}
+
+.form__input:invalid {
+    outline: none;
+    border: 0.5px solid #E02B2B;
+    border-radius: 8px;
+}
+
+.form__input-wrapper {
+    width: 100%;
+    padding-bottom: 12px;
+}
+
+.form__input__error {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.4px;
+
+    /* Negative / Negative 400 */
+
+    color: #E02B2B;
+
+    margin: 0;
+    padding: 0;
+    padding-top: 3px;
+    padding-left: 8px;
+}
+
+.form__input-textarea {
+    resize: vertical;
+
+}
+
+::-webkit-datetime-edit-day-field:not([aria-valuetext]),
+::-webkit-datetime-edit-month-field:not([aria-valuetext]),
+::-webkit-datetime-edit-year-field:not([aria-valuetext]) {
+    color: #999;
+}
+
+.block {
+    padding-right: 30px;
+    padding-left: 30px;
+
+}
+
+
+
+.button-stroke {
+    width: 100%;
+    background: #FFFFFF;
+
+    border: 0.5px solid #000000;
+    border-radius: 8px;
+
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+    margin: 0 auto;
+    padding: 0;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.mobile-bar__wrapper {
+    margin: 0;
+
+    padding: 0;
+
+    margin-bottom: 31px;
+    display: flex;
+
+    height: 56px;
+    /* ◇ Light / Light */
+
+    background: #FFFFFF;
+    /* 4dp | Appbar */
+
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 0px 0px 8px 8px;
+}
+
+.mobile-bar__title {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    flex: 1;
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.mobile-bar__button {
+    align-self: center;
+}
+
+.icon-button {
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.mobile-layout__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mobile-layout__center-child {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.mobile-flex-container__bottom {
+    padding-bottom: 32px;
+}
+
+.block__centred {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-container__space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form__checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.form__checkbox+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+.form__checkbox+label::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+}
+
+.form__checkbox:checked+label::before {
+    border-color: #0b76ef;
+    background-color: #0b76ef;
+ }
+
+.typography__h2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 100%;
+
+    color: #202020;
+
+    margin: 0;
+    padding: 0;
+}
+
+.typography__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+
+    color: #202020;
+
+    margin: 0;
+    padding: 0;
+}
+
+.typography__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #202020;
+
+    margin: 0;
+    padding: 0;
+}
+
+.typography__hint {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    text-align: right;
+
+    color: #202020;
+
+    margin: 0;
+    padding: 0;
+}
+
+.typography__text-bold {
+    font-weight: 700;
+}
+
+
+
+.sms-input__container{
+    height: 56px;
+}
+.sms-input__character {
+    border: 0.5px solid rgba(32, 32, 32, 0.5);
+    border-radius: 8px;
+    width: 48px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    /* identical to box height, or 32px */
+
+    text-align: center;
+
+    color: #202020;
+}
+
+.resume-card__container {
+
+    border-style: solid;
+    border-radius: 0;
+    border-width: 0;
+
+    background: #FFFFFF;
+    border-radius: 5px;
+
+    margin: 5px;
+
+    filter: drop-shadow(0px 1px 4px rgba(32, 32, 32, 0.12));
+}
+
+.resume-card__container_left-border {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left-width: 9px;
+}
+
+.resume-card__container_top-border {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-width: 9px;
 }
