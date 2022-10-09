@@ -5,15 +5,15 @@ import styled, {css} from "styled-components";
 export type ButtonProps = {
     children: ReactNode,
     click?: () => void,
-    color?: Color,
+    color?: ButtonColor,
     fullWidth?: boolean,
     disabled?: boolean,
     type?: "button" | "submit" | "reset" | undefined
 }
 
-type Color = "yellow" | "black";
+type ButtonColor = "yellow" | "black";
 
-const ButtonFillStyle = styled.button<{ color: Color, fullWidth: boolean }>`
+const ButtonFillStyle = styled.button<{ color: ButtonColor, fullWidth: boolean }>`
   width: ${({fullWidth}) => fullWidth ? '100%' : undefined};
 
   border-radius: 8px;

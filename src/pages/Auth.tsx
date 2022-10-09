@@ -1,4 +1,3 @@
-import {useStores} from "../store/AppStateStore";
 import {IconButton} from "../componets/MobileBar";
 
 import BackIcon from "../assets/icons/back-btn-icon.png"
@@ -17,26 +16,47 @@ import MaskedInput from 'react-text-mask'
 import styled from "styled-components";
 import {checkPhone, checkVerificationSms, login, register, sendVerificationSms} from "../api/accountApi";
 import {api} from "../api/api";
-import {AppCheckbox, CheckboxLabel} from "../componets/AppInput/AppInput";
+import {AppCheckbox, CheckboxLabel} from "../componets/app-input/AppInput";
 import {useForm} from "react-hook-form";
 import {log} from "util";
 import {isBooleanObject} from "util/types";
+import {useStores} from "../store/RootStore";
+import {access} from "fs";
 
-const AuthLayout = ({close, back = true, children}: { close: boolean, back: boolean, children: ReactNode }) => {
+export type Action = () => void;
+
+const AuthLayout = ({
+                        close,
+                        back = true,
+                        children,
+                        closeClick = undefined,
+                        backAction = undefined
+                    }: {
+    close: boolean,
+    back: boolean,
+    children: ReactNode,
+    closeClick?: Action,
+    backAction?: Action
+}) => {
     const {isMobile} = useMedia();
     const {appState} = useStores();
 
-    if (!isMobile) {
-        back = false
-    }
 
     const navigate = useNavigate()
 
     const closeAuth = () => {
+        if (closeClick) {
+            closeClick();
+            return;
+        }
         navigate("/")
     }
 
     const backClick = () => {
+        if (backAction) {
+            backAction();
+            return;
+        }
         navigate(-1);
     }
 
@@ -85,23 +105,48 @@ const parsePhone = (raw: string) => raw.substring(2)
     .replaceAll(')', '')
     .replaceAll('-', '');
 
-export const Auth = () => {
+export const Auth = ({
+                         closeClick = undefined,
+                         login = undefined,
+                         register = undefined
+                     }: { closeClick?: Action, login?: Action, register?: Action }) => {
     const navigate = useNavigate();
 
-    return <AuthLayout close={true} back={false}>
+    const registerClick = () => {
+        if (register) {
+            register()
+            return
+        }
+        navigate('/register')
+    }
+
+    const loginClick = () => {
+        if (login) {
+            login()
+            return
+        }
+        navigate('/login')
+    }
+
+
+    return <AuthLayout close={true} back={false} closeClick={closeClick}>
         <Block centred style={{marginTop: '30px'}}>
             <img src={Logo} style={{width: '146px'}}/>
         </Block>
 
         <Block style={{marginTop: '30px'}}>
-            <Button click={() => navigate('/login')}>Войти</Button>
+            <Button click={loginClick}>Войти</Button>
             <div style={{marginTop: '15px'}}></div>
-            <ButtonStroke click={() => navigate('/register')}>Зарегестрироваться</ButtonStroke>
+            <ButtonStroke click={registerClick}>Зарегестрироваться</ButtonStroke>
         </Block>
     </AuthLayout>
 }
 
-export const RegisterByPhone = () => {
+export const RegisterByPhone = ({
+                                    closeClick = undefined,
+                                    backClick = undefined,
+                                    next = undefined
+                                }: { closeClick?: Action, backClick?: Action, next?: Action }) => {
 
     const {register, watch, handleSubmit, formState: {errors, isValid}} = useForm();
 
@@ -135,12 +180,17 @@ export const RegisterByPhone = () => {
 
             appState.setPhone(phone);
 
+            if (next) {
+                next();
+                return;
+            }
+
             navigate('/register/sms')
         })
     }
 
 
-    return <AuthLayout close={true} back={true}>
+    return <AuthLayout close={true} back={true} closeClick={closeClick} backAction={backClick}>
         <form onSubmit={handleSubmit(clickNext)}>
             <Block style={{marginTop: '30px'}}>
                 <Typography.H2>Регистрация по смс</Typography.H2>
@@ -156,7 +206,7 @@ export const RegisterByPhone = () => {
 
             <Block>
                 <AgreementContainer>
-                    <AppCheckbox field="agreement1" {...register("agreement1", {required: true})} defaultValue={true}>
+                    <AppCheckbox field="agreement1" {...register("agreement1", {required: true})} >
                         <CheckboxLabel htmlFor="agreement1">Согласен на обработку персональных данных</CheckboxLabel>
                     </AppCheckbox>
                     <AppCheckbox field="agreement2" {...register("agreement2", {required: true})} defaultValue={true}>
@@ -169,7 +219,11 @@ export const RegisterByPhone = () => {
     </AuthLayout>
 }
 
-export const RegisterSMSInput = () => {
+export const RegisterSMSInput = ({
+                                     closeClick = undefined,
+                                     backClick = undefined,
+                                     next = undefined
+                                 }: { closeClick?: Action, backClick?: Action, next?: Action }) => {
     const navigate = useNavigate()
 
     const {appState} = useStores()
@@ -186,12 +240,17 @@ export const RegisterSMSInput = () => {
                 return;
             }
             appState.setPhoneCode(value)
+
+            if (next) {
+                next()
+                return;
+            }
             navigate("/register/password")
         }).then(appState.hideLoading)
     }
 
 
-    return <AuthLayout close={true} back={true}>
+    return <AuthLayout close={true} back={true} closeClick={closeClick} backAction={backClick}>
         <Block style={{marginTop: '30px'}}>
             <Typography.H2>Смс код</Typography.H2>
             <Typography.Text style={{marginTop: '12px'}}>
@@ -228,9 +287,13 @@ export const RegisterSMSInput = () => {
 
     </AuthLayout>
 }
-export const RegisterPasswordInput = () => {
+export const RegisterPasswordInput = ({
+                                          closeClick = undefined,
+                                          backClick = undefined,
+                                          next = undefined
+                                      }: { closeClick?: Action, backClick?: Action, next?: Action }) => {
     const navigate = useNavigate()
-    const {appState} = useStores()
+    const {appState, userStore} = useStores()
     const [password, setPassword] = useState("")
     const isPasswordValid = useMemo(() => password.length >= 8, [password])
 
@@ -246,13 +309,18 @@ export const RegisterPasswordInput = () => {
                 return
             }
 
-            appState.setJwt(result.result!)
+            userStore.setJwt(result.result!)
+
+            if (next) {
+                next()
+                return;
+            }
 
             navigate("/");
         })
     }
 
-    return <AuthLayout close={true} back={true}>
+    return <AuthLayout close={true} back={true} closeClick={closeClick} backAction={backClick}>
         <Block style={{marginTop: '30px'}}>
             <Typography.H2>Пароль</Typography.H2>
             <Typography.Text style={{marginTop: '12px'}}>
@@ -272,7 +340,11 @@ export const RegisterPasswordInput = () => {
     </AuthLayout>
 }
 
-export const LoginByPhone = () => {
+export const LoginByPhone = ({
+                                 closeClick = undefined,
+                                 backClick = undefined,
+                                 next = undefined
+                             }: { closeClick?: Action, backClick?: Action, next?: Action }) => {
     const navigate = useNavigate()
     const {appState} = useStores();
 
@@ -292,11 +364,16 @@ export const LoginByPhone = () => {
 
         appState.setPhone(phone);
 
+        if(next){
+            next()
+            return;
+        }
+
         navigate('/login/password')
     }
 
 
-    return <AuthLayout close={true} back={true}>
+    return <AuthLayout close={true} back={true} closeClick={closeClick} backAction={backClick}>
         <Block style={{marginTop: '30px'}}>
             <Typography.H2>Вход по номеру </Typography.H2>
             <Typography.Text style={{marginTop: '12px'}}>
@@ -312,9 +389,13 @@ export const LoginByPhone = () => {
     </AuthLayout>
 }
 
-export const LoginPasswordInput = () => {
+export const LoginPasswordInput = ({
+                                       closeClick = undefined,
+                                       backClick = undefined,
+                                       next = undefined
+                                   }: { closeClick?: Action, backClick?: Action, next?: Action }) => {
     const navigate = useNavigate()
-    const {appState} = useStores()
+    const {appState, userStore} = useStores()
     const [password, setPassword] = useState("")
     const isPasswordValid = useMemo(() => password.length >= 8, [password])
 
@@ -330,14 +411,18 @@ export const LoginPasswordInput = () => {
                 return
             }
 
-            appState.setJwt(result.result!)
+            userStore.setJwt(result.result!)
+
+            if (next) {
+                next()
+            }
 
             navigate("/");
         })
     }
 
 
-    return <AuthLayout close={true} back={true}>
+    return <AuthLayout close={true} back={true} closeClick={closeClick} backAction={backClick}>
         <Block style={{marginTop: '30px'}}>
             <Typography.H2>Добро пожаловать</Typography.H2>
             <Typography.Text style={{marginTop: '12px'}}>

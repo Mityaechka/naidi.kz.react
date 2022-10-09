@@ -3,16 +3,16 @@ import {MobileBar} from "../componets/MobileBar";
 import {Block} from "../componets/Block";
 import {DatePicker, Input, Select, SelectOption} from "../componets/Input";
 import {Area, City, Gender} from "../models/Data";
-import {useStores} from "../store/AppStateStore";
 import React, {ForwardedRef, ReactNode, useEffect, useMemo, useState} from "react";
 import {getAreas, getCities} from "../api/dictionaryApi";
 import {values} from "mobx";
 import {FieldErrors, FieldValues, useForm, useFormContext} from "react-hook-form";
 import styled from "styled-components";
-import {AppCheckbox, AppInput, AppSelect} from "../componets/AppInput/AppInput";
+import {AppCheckbox, AppInput, AppSelect} from "../componets/app-input/AppInput";
 import {Button} from "../componets/Button";
 import {Simulate} from "react-dom/test-utils";
 import submit = Simulate.submit;
+import {useStores} from "../store/RootStore";
 
 
 export const UserProfileEdit = () => {
@@ -62,7 +62,7 @@ export const UserProfileEdit = () => {
         appState.showLoading()
     };
 
-    return <MobileLayout top={<MobileBar title="Мои данные"/>}>
+    return <>
         <Block>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <AppInput label="Фамилия" field="firstName"
@@ -99,5 +99,5 @@ export const UserProfileEdit = () => {
 
 
         </Block>
-    </MobileLayout>
+    </>
 }

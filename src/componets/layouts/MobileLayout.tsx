@@ -1,7 +1,7 @@
 import {ReactNode} from "react";
-import {useStores} from "../../store/AppStateStore";
 import {MobileBar} from "../MobileBar";
 import {LoadingSpinner} from "../LoadingSpinner";
+import {useStores} from "../../store/RootStore";
 
 export const MobileLayout = ({children, top}:{children: ReactNode, top: ReactNode}) => {
     const {appState} = useStores()

@@ -1,17 +1,17 @@
 import {action, makeObservable, observable} from "mobx";
 import {createContext, useContext} from "react";
 import {api} from "../api/api";
+import {RootStore} from "./RootStore";
 
-class AppStateStore {
+export class AppStateStore {
 
     title: string = "";
+    
 
     loading: boolean = false
 
     phone?: string
     phoneCode?:string
-
-    jwt?: string
 
     constructor() {
         makeObservable(this, {
@@ -23,15 +23,6 @@ class AppStateStore {
             hideLoading: action
 
         });
-        const token = api.getToken()
-        if(token) {
-            this.setJwt(token)
-        }
-    }
-
-    setJwt(jwt: string){
-        this.jwt = jwt;
-        api.saveToken(jwt)
     }
 
     setTitle(title: string) {
@@ -54,17 +45,3 @@ class AppStateStore {
     }
 }
 
-export class RootStore {
-    public appState: AppStateStore;
-
-    constructor() {
-        this.appState = new AppStateStore();
-    }
-}
-
-console.log("STORE")
-export const StoreContext = createContext<RootStore>(new RootStore())
-
-export const useStores = () => {
-    return useContext(StoreContext)
-}

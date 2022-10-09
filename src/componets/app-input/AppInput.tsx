@@ -1,8 +1,12 @@
 import styled from "styled-components";
-import React, {ForwardedRef, ReactNode, useEffect, useState} from "react";
+import React, {Children, cloneElement, ForwardedRef, ReactNode, useEffect, useState} from "react";
 import {FieldErrors} from "react-hook-form";
 import {SelectOption} from "../Input";
-import CheckedIcon from "../../assets/icons/checked-icon.png"
+
+export enum IconPosition {
+    Left,
+    Right
+}
 
 const FormErrorText = styled.span`
   font-weight: 400;
@@ -30,16 +34,18 @@ const InputContainer = styled.div`
   padding-bottom: 12px;
 `
 
-const InputLabel = styled.label`
+const InputLabel = styled.label<{ disabled: boolean }>`
   font-style: normal;
   font-weight: 900;
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+
+  color: ${({disabled}) => !disabled ? "#000000" : "rgba(32, 32, 32, 0.5)"};
 `
 
-const InputElement = styled.input`
+const InputElement = styled.input<{ withIcon: boolean, iconPosition?: IconPosition }>`
   box-sizing: border-box;
   background: #FFFFFF;
   border: 0.5px solid #7B8794;
@@ -48,6 +54,7 @@ const InputElement = styled.input`
   text-indent: 13px;
   width: 100%;
   margin-top: 7px;
+  padding-left: ${({withIcon, iconPosition}) => withIcon && iconPosition == IconPosition.Left ? "30px" : undefined};
 `
 
 const SelectElement = styled.select`
@@ -64,19 +71,41 @@ const SelectElement = styled.select`
 
 export const AppInput = React.forwardRef(({
                                               field,
-                                              label,
+                                              label = undefined,
+                                              placeholder = undefined,
                                               errors = undefined,
+                                              icon = undefined,
+                                              iconPosition = IconPosition.Left,
+                                              data = undefined,
+                                              disabled = false,
+                                              value = undefined,
                                               ...rest
                                           }: {
     field: string,
-    label: string,
-    errors?: FieldErrors
+    label?: string,
+    placeholder?: string,
+    icon?: ReactNode,
+    iconPosition?: IconPosition,
+    errors?: FieldErrors,
+    value?: string,
+    disabled?: boolean,
+    data?: string[]
 }, ref: ForwardedRef<HTMLInputElement>) => {
     return (
         <InputContainer>
-            <InputLabel htmlFor={field}>{label}</InputLabel>
-            <InputElement name={field} {...rest} ref={ref}/>
-            {errors && <FormErrorContainer><FormError errors={errors} field={field}/></FormErrorContainer>}
+            <>
+                <InputLabel htmlFor={field} disabled={false}>{label}</InputLabel>
+                {icon && icon}
+                <InputElement name={field}
+                              placeholder={placeholder}
+                              {...rest} ref={ref}
+                              withIcon={icon != undefined}
+                              list={field}
+                              disabled={disabled}
+                              defaultValue={value}
+                              iconPosition={iconPosition}/>
+                {errors && <FormErrorContainer><FormError errors={errors} field={field}/></FormErrorContainer>}
+            </>
         </InputContainer>
     );
 });
@@ -97,7 +126,7 @@ export const AppSelect = React.forwardRef(({
 }, ref: ForwardedRef<HTMLSelectElement>) => {
     return (
         <InputContainer>
-            <InputLabel htmlFor={field}>{label}</InputLabel>
+            <InputLabel htmlFor={field} disabled={false}>{label}</InputLabel>
             <SelectElement name={field} {...rest} ref={ref}>
                 {emptyOption && <option value="" title=""/>}
                 {options.map(option => <option key={option.value} value={option.value}>{option.title}</option>)}
@@ -176,11 +205,10 @@ export const AppCheckbox = React.forwardRef(({
     //const [checked, setChecked] = useState(defaultValue);
 
     return (
-        <InputContainer >
+        <InputContainer>
             <Checkbox name={field}
                       {...rest}
                       ref={ref}
-                      checked={defaultValue}
                       type="checkbox"/>
             {children}
         </InputContainer>

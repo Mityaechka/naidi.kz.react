@@ -53,10 +53,12 @@ const CardContainer = styled.div<{ color?: string, border?: Border }>`
   border-radius: 5px;
   margin: 5px;
   padding: 5px 0;
-  filter: drop-shadow(0px 1px 4px rgba(32, 32, 32, 0.12));
+  filter: drop-shadow(0px 1px 4px #A9A9A9);
 
   border-color: ${props => props.color};
   ${({border}) => borderVariant[border ?? 'none']}
+
+  background: #ffffff;
 `;
 
 const CardSectionWrapper = styled.div`

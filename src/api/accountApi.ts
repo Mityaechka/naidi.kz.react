@@ -1,5 +1,6 @@
 import {api} from "./api";
 import {stringify} from "querystring";
+import {User} from "../models/Data";
 
 export const checkPhone = (phone: string) => api.post<unknown>('api/account/check-phone', {phone});
 
@@ -11,4 +12,4 @@ export const register = (data: {phone: string, sms: string, password: string}) =
 
 export const login = (data: {phone: string, password: string}) => api.post<string>('api/account/login', data);
 
-export const user = () => api.get<{ }>('api/account/user');
+export const user = () => api.get<User>('api/account/user');

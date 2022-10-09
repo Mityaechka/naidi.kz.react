@@ -1,11 +1,11 @@
 import BackBtnIcon from "../assets/icons/back-btn-icon.png";
-import {useStores} from "../store/AppStateStore";
+import {Action} from "../pages/Auth";
 
-export const MobileBar = ({title}: { title: string }) => {
+export const MobileBar = ({title, backClick = undefined}: { title: string, backClick?: Action }) => {
 
     return <div className="mobile-bar__wrapper">
         <div className="mobile-bar__button">
-            <IconButton icon={BackBtnIcon}/>
+            <IconButton icon={BackBtnIcon} click={backClick}/>
         </div>
 
         <h1 className="mobile-bar__title">{title}</h1>
