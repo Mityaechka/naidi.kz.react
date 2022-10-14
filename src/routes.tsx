@@ -9,10 +9,12 @@ import {
     RegisterSMSInput
 } from "./pages/Auth";
 import {AppLayout} from "./componets/layouts/AppLayout";
-import {UserProfileEdit} from "./pages/UserProfileEdit";
-import {UserProfile} from "./pages/UserProfile";
-import {UserProfileView} from "./pages/UserProfileView";
+import {UserProfileEdit} from "./pages/profile/UserProfileEdit";
+import {UserProfile} from "./pages/profile/UserProfile";
+import {UserProfileView} from "./pages/profile/UserProfileView";
 import {ProfileLayout} from "./componets/layouts/ProfileLayout";
+import {UserResumesView} from "./pages/resume/UserResumesView";
+import {UserResumeCreate} from "./pages/resume/UserResumeCreate";
 
 export const routes = createBrowserRouter([
     {
@@ -35,8 +37,12 @@ export const routes = createBrowserRouter([
                     {path: "", element: <UserProfile/>},
                     {path: "profile", element: <UserProfileView/>},
                     {path: "profile/edit", element: <UserProfileEdit/>},
+
+                    {path: "resumes", element: <UserResumesView/>},
+                    {path: "resumes/create", element: <UserResumeCreate/>}
+
                 ]
-            }
+            },
 
         ]
 

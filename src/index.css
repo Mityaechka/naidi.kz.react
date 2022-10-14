@@ -363,6 +363,16 @@ button {
     right: -10px;
 }
 
+.w-24{
+    width: 24px;
+    height: 24px;
+}
+
+.w-14{
+    width: 14px;
+    height: 14px;
+}
+
 
 
 datalist {

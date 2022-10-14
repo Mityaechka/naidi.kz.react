@@ -1,5 +1,7 @@
 import BackBtnIcon from "../assets/icons/back-btn-icon.png";
 import {Action} from "../pages/Auth";
+import {Icon, IconProps} from "react-feather";
+import {FC} from "react";
 
 export const MobileBar = ({title, backClick = undefined}: { title: string, backClick?: Action }) => {
 
@@ -19,10 +21,12 @@ export const MobileBar = ({title, backClick = undefined}: { title: string, backC
 
 
 export const IconButton = ({
-                               icon,
+                               icon = undefined,
+                               fIcon = undefined,
                                click = undefined,
                                size = undefined
-                           }: { icon: any, click?: () => void, size?: number }) => {
+                           }: { icon: any, fIcon?: Icon, click?: () => void, size?: number }) => {
+
     return <button className="icon-button"
                    style={{width: size, height: size}}
                    onClick={() => {
@@ -30,6 +34,7 @@ export const IconButton = ({
                            click();
                        }
                    }}>
-        <img src={icon} style={{width: size}}/>
+        {fIcon && fIcon}
+        {icon && <img src={icon} style={{width: size}}/>}
     </button>
 }

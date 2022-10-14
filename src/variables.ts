@@ -3,7 +3,7 @@ const dev = {
 }
 
 const prod = {
-    baseUrl: 'https://localhost:44343',
+    baseUrl: 'https://naidi.kz',
 }
 
 

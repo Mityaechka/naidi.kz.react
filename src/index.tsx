@@ -8,6 +8,7 @@ import Modal from 'react-modal';
 import {DefaultTheme, ThemeProvider} from 'styled-components';
 import {useMedia} from "./hooks/mediaHook";
 import {RootStore, StoreContext} from "./store/RootStore";
+import moment from "moment";
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 Modal.setAppElement('#root');
@@ -25,13 +26,14 @@ export const theme: DefaultTheme = {
     m16: '',
 };
 
+moment.locale('ru');
 
 root.render(
-    <React.StrictMode>
+    <>
         <ThemeProvider theme={theme}>
             <StoreContext.Provider value={new RootStore()}>
                 <RouterProvider router={routes}/>
             </StoreContext.Provider>
         </ThemeProvider>
-    </React.StrictMode>
+    </>
 );

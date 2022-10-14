@@ -6,7 +6,6 @@ import styled from "styled-components";
 
 import LogoSmall from "../assets/logo-small.png"
 import {useNavigate} from "react-router-dom";
-import {user} from "../api/accountApi";
 import {Activity} from "../models/Data";
 import {ActivitySelectInput} from "../componets/app-input/ActivitySelecInput";
 import {JobCard, Size} from "../componets/Job";
@@ -133,11 +132,16 @@ const ResumesContainer = styled.div`
 `
 
 const ResumesWrapper = styled.div`
-  @media ${device.tabletOrDesktop} {
+  @media ${device.desktop} {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr ;
+    column-gap: 5vw;
   }
-
+  @media ${device.tablet} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    column-gap: 1vw;
+  }
 `
 
 
@@ -178,7 +182,8 @@ const JobCardsContainer = styled.div`
   @media ${device.tabletOrDesktop} {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 24px;
+    column-gap: 5vw;
+    row-gap: 10px;
   }
 `
 const JobTitle = styled.p`
@@ -195,27 +200,27 @@ export const MainPage = observer(() => {
     const {appState, userStore, modalStore} = useStores()
     const {isTabletOrDesktop, isMobile} = useMedia()
     const activities: Activity[] = [
-        {name: "Электромонтажник", id: "1"},
-        {name: "Продавец", id: "2"},
-        {name: "Няня", id: "3"},
-        {name: "Механик", id: "4"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
-        {name: "Водитель", id: "5"},
+        // {name: "Электромонтажник", id: "1"},
+        // {name: "Продавец", id: "2"},
+        // {name: "Няня", id: "3"},
+        // {name: "Механик", id: "4"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
+        // {name: "Водитель", id: "5"},
 
     ]
 
@@ -260,8 +265,8 @@ export const MainPage = observer(() => {
         </TitleWrapper>
 
         <ButtonsContainer>
-            <Button color="yellow">Ищу работу</Button>
-            <Button color="yellow">Ищу работника</Button>
+            <Button color="yellow" fullWidth={false}>Ищу работу</Button>
+            <Button color="yellow" fullWidth={false}>Ищу работника</Button>
         </ButtonsContainer>
 
         <SearchContainer>
@@ -282,6 +287,13 @@ export const MainPage = observer(() => {
                 <ResumeCard.Big/>
                 <ResumeCard.Big/>
                 <ResumeCard.Big/>
+                {!isMobile &&
+                    <>
+                        <ResumeCard.Big/>
+                        <ResumeCard.Big/>
+                        <ResumeCard.Big/>
+                    </>
+                }
             </ResumesWrapper>
         </ResumesContainer>
 
@@ -362,11 +374,11 @@ const MailContainer = styled.div`
   padding-top: 32px;
 
   @media ${device.desktop} {
-    margin: 0 20vh;
+    margin: 0 20vw;
   }
 
   @media ${device.tablet} {
-    margin: 0 10vh;
+    margin: 0 10vw;
   }
 `
 

@@ -128,7 +128,7 @@ export const AppSelect = React.forwardRef(({
         <InputContainer>
             <InputLabel htmlFor={field} disabled={false}>{label}</InputLabel>
             <SelectElement name={field} {...rest} ref={ref}>
-                {emptyOption && <option value="" title=""/>}
+                {emptyOption && <option value={undefined} title={undefined}/>}
                 {options.map(option => <option key={option.value} value={option.value}>{option.title}</option>)}
             </SelectElement>
             {errors && <FormErrorContainer><FormError errors={errors} field={field}/></FormErrorContainer>}

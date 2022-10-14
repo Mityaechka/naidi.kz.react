@@ -3,25 +3,36 @@ import {createContext, useContext} from "react";
 import {api} from "../api/api";
 import {RootStore} from "./RootStore";
 
+export type Breadcrumb = {
+    title: string,
+    path: string
+}
+
+export type Section = "" | "my-profile" | "my-resumes"
+
 export class AppStateStore {
 
     title: string = "";
-    
+    section: Section = ""
+    breadcrumbs: Breadcrumb[] = []
 
     loading: boolean = false
 
     phone?: string
-    phoneCode?:string
+    phoneCode?: string
 
     constructor() {
         makeObservable(this, {
             title: observable,
+            section: observable,
+            breadcrumbs: observable,
             loading: observable,
             phone: observable,
             setTitle: action,
             showLoading: action,
-            hideLoading: action
-
+            hideLoading: action,
+            setSection: action,
+            setBreadcrumbs: action
         });
     }
 
@@ -29,9 +40,18 @@ export class AppStateStore {
         this.title = title;
     }
 
+    setSection(value: Section) {
+        this.section = value
+    }
+
+    setBreadcrumbs(value: Breadcrumb[]) {
+        this.breadcrumbs = value
+    }
+
     setPhone(phone: string) {
         this.phone = phone;
     }
+
     setPhoneCode(code: string) {
         this.phoneCode = code;
     }

@@ -83,12 +83,12 @@ export const JobCard = ({size = Size.Small}: { size?: Size }) => {
 
                 <DescriptionWrapper>
                     <DescriptionContainer>
-                        <DollarSign className="job-icon"/>
+                        <DollarSign className="w-14"/>
                         <DescriptionText>130 000 тг/мес</DescriptionText>
                     </DescriptionContainer>
 
                     <DescriptionContainer>
-                        <MapPin className="job-icon"/>
+                        <MapPin className="w-14"/>
                         <DescriptionText>Есильский р-н, г. Нур-Султан</DescriptionText>
                     </DescriptionContainer>
                 </DescriptionWrapper>

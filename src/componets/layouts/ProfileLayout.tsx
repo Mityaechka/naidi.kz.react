@@ -7,8 +7,11 @@ import styled from "styled-components";
 import {AppInput} from "../app-input/AppInput";
 import {useRouteChange} from "../../hooks/useRouteChange";
 import {ProfileListItem} from "../profile-list-item/ProfileListItem";
+import Logo from "../../assets/logo.png"
+import {observe} from "mobx";
+import {observer} from "mobx-react";
 
-export const ProfileLayout = () => {
+export const ProfileLayout = observer(() => {
     const media = useMedia()
 
     if (media.isMobile) {
@@ -16,11 +19,16 @@ export const ProfileLayout = () => {
     }
 
     return <DesktopProfileLayout/>
-}
+})
 
 const LayoutContainer = styled.div`
   margin: 0 160px;
   height: 100%;
+
+`
+
+const NavbarContainer = styled.div`
+  padding-bottom: 35px;
 `
 
 const LayoutContentContainer = styled.div`
@@ -34,6 +42,8 @@ const ListWrapper = styled.div`
   border-radius: 8px;
   padding: 24px 15px;
   min-width: 300px;
+  max-height: 200px;
+  min-height: 200px;
 `
 
 const ContentWrapper = styled.div`
@@ -45,23 +55,33 @@ const ContentWrapper = styled.div`
   height: 100%;
 `
 
-const DesktopProfileLayout = () => {
+const LogoImg = styled.img`
+:hover{
+  cursor: pointer;
+}
+`
+
+const DesktopProfileLayout = observer(() => {
     const navigator = useNavigate()
+    const {appState} = useStores()
+
     const back = () => {
         navigator(-1)
     }
     const [location] = useRouteChange();
-    console.log(location)
+
     return <>
         <LayoutContainer>
+            <NavbarContainer>
+                <LogoImg src={Logo} onClick={() => navigator("/")}/>
+            </NavbarContainer>
             <LayoutContentContainer>
                 <ListWrapper>
-                    <ProfileListItem click={() => navigator("/user/profile")} title="Мои данные" bold={location?.pathname == "/user/profile"}/>
-                    <ProfileListItem click={() => { }} title="Настройки"/>
-                    <ProfileListItem click={() => {}} title="Отклики"/>
-                    <ProfileListItem click={() => {}} title="Объявления"/>
-                    <ProfileListItem click={() => {}} title="Naidi"/>
-                    <ProfileListItem click={() => {}} title="Получить бух-е документы"/>
+                    <ProfileListItem click={() => navigator("/user/profile")} title="Мои данные"
+                                     bold={appState.section == "my-profile"}/>
+
+                    <ProfileListItem click={() => navigator("/user/resumes")} title="Мои резюме"
+                                     bold={appState.section == "my-resumes"}/>
                 </ListWrapper>
                 <ContentWrapper><Outlet/></ContentWrapper>
             </LayoutContentContainer>
@@ -69,9 +89,9 @@ const DesktopProfileLayout = () => {
 
         </LayoutContainer>
     </>
-}
+})
 
-const MobileProfileLayout = () => {
+const MobileProfileLayout = observer(() => {
     const {appState} = useStores()
     const navigator = useNavigate()
     const back = () => {
@@ -79,7 +99,7 @@ const MobileProfileLayout = () => {
     }
 
     return <>
-            <MobileBar title={appState.title} backClick={back}/>
-            <Outlet/>
+        <MobileBar title={appState.title} backClick={back}/>
+        <Outlet/>
     </>
-}
+})

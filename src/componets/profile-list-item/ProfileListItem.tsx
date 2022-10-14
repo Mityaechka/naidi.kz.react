@@ -9,6 +9,10 @@ const ListItemWrapper = styled.div`
   justify-content: space-between;
   margin: 5px 0;
   padding: 0 10px;
+  
+  :hover{
+    cursor: pointer;
+  }
 `
 
 const Line = styled.div`

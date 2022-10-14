@@ -1,13 +1,12 @@
-import {Typography} from "./Typography"
-import {Colors, flex} from "./styles";
-import {IconButton} from "./MobileBar";
-import CloseIcon from "../assets/icons/close-btn-icon.png";
-import {Block} from "./Block";
 import styled, {css} from "styled-components";
-import {theme} from "../index";
-import {DollarSign, MapPin, User} from "react-feather";
-
-
+import {theme} from "../../index";
+import {Colors} from "../styles";
+import {IconButton} from "../MobileBar";
+import DetailsIcon from "../../assets/icons/details-icon.png";
+import MoneyIcon from "../../assets/icons/icon-money.png";
+import GenderIcon from "../../assets/icons/icon-gender.png";
+import LocationIcon from "../../assets/icons/icon-location.png";
+import {ReactNode} from "react";
 
 const Divider = styled.div`
   border: 1px solid rgba(32, 32, 32, 0.1);
@@ -60,10 +59,10 @@ const CardContainer = styled.div<{ color?: string, border?: Border }>`
 `;
 
 const CardSectionWrapper = styled.div`
-  margin: 0 24px;
+  margin: 10px 24px;
 `
 
-type Border = 'left' | 'top' | 'none'
+export type Border = 'left' | 'top' | 'none'
 
 
 const borderVariant: Record<NonNullable<Border>, ReturnType<typeof css>> = {
@@ -103,24 +102,10 @@ const DescriptionText = styled.span`
 `
 
 
-const Big = () => {
-    return <CardContainer color={theme.colors.yellow} border="top">
+export const ResumeComponent = ({border, header}: {color?: string, border: Border, header: ReactNode}) => {
+    return <CardContainer color={theme.colors.yellow} border={border}>
         <CardSectionWrapper>
-            <CardText>
-                Монтажник железобетонных конструкций
-            </CardText>
-            <CardTitle>
-                Микрофинансовая организация Lending and Financy technologies
-            </CardTitle>
-
-            <CardStat>
-                <CardStatText style={{color: Colors.Gray}}>19.02.2021</CardStatText>
-
-                {/*<IconButton fIcon={DetailsIcon} size={14}/>*/}
-
-
-            </CardStat>
-
+            {header}
         </CardSectionWrapper>
 
         <Divider/>
@@ -128,21 +113,21 @@ const Big = () => {
         <CardSectionWrapper>
 
             <DescriptionRow>
-                <DollarSign className="w-24"/>
+                <DescriptionIcon src={MoneyIcon}/>
                 <DescriptionTextWrapper>
                     <DescriptionText>130 000 ₸/мес</DescriptionText>
                 </DescriptionTextWrapper>
             </DescriptionRow>
 
             <DescriptionRow>
-                <User className="w-24"/>
+                <DescriptionIcon src={GenderIcon}/>
                 <DescriptionTextWrapper>
                     <DescriptionText>Мужской</DescriptionText>
                 </DescriptionTextWrapper>
             </DescriptionRow>
 
             <DescriptionRow>
-                <MapPin className="w-24"/>
+                <DescriptionIcon src={LocationIcon}/>
                 <DescriptionTextWrapper>
                     <DescriptionText>Есильский р-н, г. Нур-Султан</DescriptionText>
                 </DescriptionTextWrapper>
@@ -152,7 +137,4 @@ const Big = () => {
 
     </CardContainer>
 }
-
-
-export const ResumeCard = { Big}
 

@@ -14,7 +14,7 @@ import {MobileStretchContainer} from "../componets/layouts/MobileLayout";
 import VerificationInput from "react-verification-input";
 import MaskedInput from 'react-text-mask'
 import styled from "styled-components";
-import {checkPhone, checkVerificationSms, login, register, sendVerificationSms} from "../api/accountApi";
+import {checkPhone, checkVerificationSms, getUser, login, register, sendVerificationSms} from "../api/accountApi";
 import {api} from "../api/api";
 import {AppCheckbox, CheckboxLabel} from "../componets/app-input/AppInput";
 import {useForm} from "react-hook-form";
@@ -311,12 +311,22 @@ export const RegisterPasswordInput = ({
 
             userStore.setJwt(result.result!)
 
-            if (next) {
-                next()
-                return;
-            }
+            appState.showLoading()
 
-            navigate("/");
+            getUser().then(userResult => {
+                appState.hideLoading();
+
+                if(userResult.isSuccess){
+                    userStore.setUser(userResult.result)
+                }
+
+                if (next) {
+                    next()
+                }
+
+                navigate("/");
+            })
+
         })
     }
 
@@ -413,11 +423,23 @@ export const LoginPasswordInput = ({
 
             userStore.setJwt(result.result!)
 
-            if (next) {
-                next()
-            }
+            appState.showLoading()
 
-            navigate("/");
+            getUser().then(userResult => {
+                appState.hideLoading();
+
+                if(userResult.isSuccess){
+                    userStore.setUser(userResult.result)
+                }
+
+                if (next) {
+                    next()
+                }
+
+                navigate("/");
+            })
+
+
         })
     }
 

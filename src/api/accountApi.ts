@@ -12,4 +12,4 @@ export const register = (data: {phone: string, sms: string, password: string}) =
 
 export const login = (data: {phone: string, password: string}) => api.post<string>('api/account/login', data);
 
-export const user = () => api.get<User>('api/account/user');
+export const getUser = () => api.get<User>('api/account/user');

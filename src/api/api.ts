@@ -36,12 +36,12 @@ const sendApiRequest = async <T>(method: string, url: string, data: any): Promis
                 resolve(response.data as ApiData<T>)
             }
 
-            resolve({isSuccess: false});
+            resolve({isSuccess: false, result: {} as T});
         }).catch(error => {
-            resolve({isSuccess: false})
+            resolve({isSuccess: false, result: {} as T})
         })
         }catch {
-            resolve({isSuccess: false})
+            resolve({isSuccess: false, result: {} as T})
         }
     })
 }

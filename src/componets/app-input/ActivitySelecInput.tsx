@@ -26,7 +26,7 @@ export const ActivitySelectInput = ({activities}: { activities: Activity[] }) =>
 
     return <ActivitySelectContainer>
         {activities.map(activity => <>
-            <Badge title={activity.name}
+            <Badge title={activity.name.ru}
                    checked={isActivityChecked(activity)}
                    onClick={() => clickBadge(activity)}/>
         </>)}
