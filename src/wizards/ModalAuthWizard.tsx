@@ -1,4 +1,4 @@
-import {ModalStore} from "../store/ModalStore";
+import {ModalStore} from "../store/modal-store";
 import {Styles} from "react-modal";
 import {
     Auth,
@@ -7,7 +7,7 @@ import {
     RegisterByPhone,
     RegisterPasswordInput,
     RegisterSMSInput
-} from "../pages/Auth";
+} from "../pages/client/auth";
 
 export const ModalAuthWizard = ({modalStore}: { modalStore: ModalStore }) => {
 

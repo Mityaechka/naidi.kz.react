@@ -1,5 +1,5 @@
 import {createBrowserRouter} from "react-router-dom";
-import {MainPage} from "./pages/MainPage";
+import {MainPage} from "./pages/client/main-page";
 import {
     Auth,
     LoginByPhone,
@@ -7,14 +7,19 @@ import {
     RegisterByPhone,
     RegisterPasswordInput,
     RegisterSMSInput
-} from "./pages/Auth";
-import {AppLayout} from "./componets/layouts/AppLayout";
-import {UserProfileEdit} from "./pages/profile/UserProfileEdit";
-import {UserProfile} from "./pages/profile/UserProfile";
-import {UserProfileView} from "./pages/profile/UserProfileView";
-import {ProfileLayout} from "./componets/layouts/ProfileLayout";
-import {UserResumesView} from "./pages/resume/UserResumesView";
-import {UserResumeCreate} from "./pages/resume/UserResumeCreate";
+} from "./pages/client/auth";
+import {AppLayout} from "./componets/layouts/app-layout";
+import {UserProfileEdit} from "./pages/client/profile/user-profile-edit";
+import {UserProfile} from "./pages/client/profile/user-profile";
+import {UserProfileView} from "./pages/client/profile/user-profile-view";
+import {ProfileLayout} from "./componets/layouts/profile-layout";
+import {UserResumeView} from "./pages/client/resume/user-resume-view";
+import {UserResumeCreate} from "./pages/client/resume/user-resume-create";
+import {UserResumeEdit} from "./pages/client/resume/user-resume-edit";
+import {AdminLayout} from "./componets/layouts/admin-layout";
+import {ModerationResumeView} from "./pages/user/moderation/moderation-resume-view";
+import {useStores} from "./store/root-store";
+import {ResumeRequestModeration} from "./componets/user/resume-request-moderation";
 
 export const routes = createBrowserRouter([
     {
@@ -38,11 +43,19 @@ export const routes = createBrowserRouter([
                     {path: "profile", element: <UserProfileView/>},
                     {path: "profile/edit", element: <UserProfileEdit/>},
 
-                    {path: "resumes", element: <UserResumesView/>},
-                    {path: "resumes/create", element: <UserResumeCreate/>}
+                    {path: "resumes", element: <UserResumeView/>},
+                    {path: "resumes/create", element: <UserResumeCreate/>},
+                    {path: "resumes/:resumeId/edit", element: <UserResumeEdit/>},
 
                 ]
             },
+            {
+                path:"admin", element:<AdminLayout/>, children: [
+                    {path:"", element:<></>},
+                    {path:"moderation/resumes", element:<ModerationResumeView/>},
+                    {path:"moderation/resumes/:resumeId", element:<ResumeRequestModeration/>},
+                ]
+            }
 
         ]
 

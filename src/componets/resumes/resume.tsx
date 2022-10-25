@@ -1,11 +1,5 @@
 import styled, {css} from "styled-components";
 import {theme} from "../../index";
-import {Colors} from "../styles";
-import {IconButton} from "../MobileBar";
-import DetailsIcon from "../../assets/icons/details-icon.png";
-import MoneyIcon from "../../assets/icons/icon-money.png";
-import GenderIcon from "../../assets/icons/icon-gender.png";
-import LocationIcon from "../../assets/icons/icon-location.png";
 import {ReactNode} from "react";
 
 const Divider = styled.div`
@@ -102,7 +96,7 @@ const DescriptionText = styled.span`
 `
 
 
-export const ResumeComponent = ({border, header}: {color?: string, border: Border, header: ReactNode}) => {
+export const ResumeComponent = ({border, header, body}: {color?: string, border: Border, header: ReactNode, body: ReactNode}) => {
     return <CardContainer color={theme.colors.yellow} border={border}>
         <CardSectionWrapper>
             {header}
@@ -111,28 +105,7 @@ export const ResumeComponent = ({border, header}: {color?: string, border: Borde
         <Divider/>
 
         <CardSectionWrapper>
-
-            <DescriptionRow>
-                <DescriptionIcon src={MoneyIcon}/>
-                <DescriptionTextWrapper>
-                    <DescriptionText>130 000 ₸/мес</DescriptionText>
-                </DescriptionTextWrapper>
-            </DescriptionRow>
-
-            <DescriptionRow>
-                <DescriptionIcon src={GenderIcon}/>
-                <DescriptionTextWrapper>
-                    <DescriptionText>Мужской</DescriptionText>
-                </DescriptionTextWrapper>
-            </DescriptionRow>
-
-            <DescriptionRow>
-                <DescriptionIcon src={LocationIcon}/>
-                <DescriptionTextWrapper>
-                    <DescriptionText>Есильский р-н, г. Нур-Султан</DescriptionText>
-                </DescriptionTextWrapper>
-            </DescriptionRow>
-
+            {body}
         </CardSectionWrapper>
 
     </CardContainer>

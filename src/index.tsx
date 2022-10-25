@@ -7,9 +7,9 @@ import "@fontsource/roboto";
 import Modal from 'react-modal';
 import {DefaultTheme, ThemeProvider} from 'styled-components';
 import {useMedia} from "./hooks/mediaHook";
-import {RootStore, StoreContext} from "./store/RootStore";
+import {RootStore, StoreContext} from "./store/root-store";
 import moment from "moment";
-
+import "@szhsin/react-menu/dist/index.css";
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 Modal.setAppElement('#root');
 

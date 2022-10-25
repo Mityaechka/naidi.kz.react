@@ -1,6 +1,5 @@
 *, body {
     font-family: Roboto;
-    overflow-y: hidden;
     background: #FFFFFF;
     background: inherit;
 }
@@ -150,7 +149,6 @@ button {
 
     padding: 0;
 
-    margin-bottom: 31px;
     display: flex;
 
     height: 56px;
@@ -177,6 +175,8 @@ button {
 
 .mobile-bar__button {
     align-self: center;
+    width: 40px;
+    height: 40px;
 }
 
 .icon-button {

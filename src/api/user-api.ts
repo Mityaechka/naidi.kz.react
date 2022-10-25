@@ -1,5 +1,5 @@
-import {api} from "./api";
-import {Gender} from "../models/Data";
+import {apiMethods} from "./api-methods";
+import {Gender} from "../models/data";
 export type EditUserProfile = {
     firstName: string,
     lastName: string,
@@ -10,4 +10,8 @@ export type EditUserProfile = {
     cityId?: string
 }
 
-export const editUserProfile = (data: EditUserProfile) => api.post('api/user/profile/edit', data);
+const editUserProfile = (data: EditUserProfile) => apiMethods.post('api/user/profile/edit', data);
+
+export const userApi = {
+    editUserProfile
+}
