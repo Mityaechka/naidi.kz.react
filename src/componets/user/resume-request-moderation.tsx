@@ -67,10 +67,8 @@ const ResumeApproveComponent = ({request}: { request: ModerationResumeRequest })
 
     const onSubmit = (data: FormData) => {
         console.log(data)
-        const approveData: any = {
-
-        }
-        if(!request.resume.description.isFieldModerated) {
+        const approveData: any = {}
+        if (!request.resume.description.isFieldModerated) {
             approveData.description = {
                 ru: data.descriptionLang == "ru" ? request.resume.description.source : data.descriptionTranslate,
                 kz: data.descriptionLang == "kz" ? request.resume.description.source : data.descriptionTranslate,
@@ -139,12 +137,14 @@ const ResumeRejectComponent = ({request}: { request: ModerationResumeRequest }) 
     }
 
     return <form onSubmit={handleSubmit(onSubmit)}>
-        <AppSelect field="rejectReason" label="Причина отказа" options={[
-            {
-                value: RejectReason.InvalidDescription,
-                title: localize(RejectReason.ToLocalized(RejectReason.InvalidDescription))
-            },
-        ]}
+        <AppSelect field="rejectReason"
+                   label="Причина отказа"
+                   options={[
+                       {
+                           value: RejectReason.InvalidDescription,
+                           title: localize(RejectReason.ToLocalized(RejectReason.InvalidDescription))
+                       },
+                   ]}
                    {...register("rejectReason",)}/>
 
         <AppButton type="submit" color="yellow">Вернуть на доработку</AppButton>
