@@ -15,7 +15,7 @@ const ListContainer = styled.div`
 
 
 
-export const UserProfile = () => {
+export const ClientProfile = () => {
     const {app} = useStores()
     const media = useMedia()
     const navigator = useNavigate()
@@ -30,9 +30,9 @@ export const UserProfile = () => {
 
     return <>
         <ListContainer>
-            <ProfileListItem click={() => navigator("/user/profile")} title="Мои данные"/>
+            <ProfileListItem click={() => navigator("/client/profile")} title="Мои данные"/>
 
-            <ProfileListItem click={() => navigator("/user/resumes")} title="Мои резюме"/>
+            <ProfileListItem click={() => navigator("/client/resumes")} title="Мои резюме"/>
 
 
         </ListContainer>

@@ -1,7 +1,7 @@
 import {useForm, useWatch} from "react-hook-form";
 import {useStores} from "../../../store/root-store";
 import React, {useEffect, useMemo, useState} from "react";
-import {Activity, Area, City, Gender, Resume, User} from "../../../models/data";
+import {Activity, Area, City, Gender, Resume, Client} from "../../../models/data";
 import {Block} from "../../../componets/Block";
 import {AppInput, AppSelect, AppTextArea, SelectOption} from "../../../componets/app-input/app-input";
 import {AppButton} from "../../../componets/app-input/app-button";
@@ -9,7 +9,7 @@ import api from "../../../api";
 import {CreateResumeData, resumeApi} from "../../../api/resume-api";
 import {useNavigate, useParams} from "react-router-dom";
 
-export const UserResumeEdit = () => {
+export const ClientResumeEdit = () => {
     const {register, watch, handleSubmit, formState: {errors}, setValue, control} = useForm({});
     const {resumeId} = useParams();
     const {app, cache} = useStores();
@@ -56,7 +56,7 @@ export const UserResumeEdit = () => {
         const areasPromise = cache.getAllAreas();
         const citiesPromise = cache.getAllCities();
         const activitiesPromise = cache.getAllActivities();
-        const resumePromise = api.resume.getUserResume(resumeId!)
+        const resumePromise = api.resume.getClientResume(resumeId!)
 
         app.showLoading()
         Promise.all([areasPromise, citiesPromise, activitiesPromise, resumePromise]).then(result => {
@@ -83,7 +83,7 @@ export const UserResumeEdit = () => {
                 return
             }
 
-            navigation('/user/resumes')
+            navigation('/client/resumes')
         })
         //appState.showLoading()
     };

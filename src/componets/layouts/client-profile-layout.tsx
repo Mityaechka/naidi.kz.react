@@ -11,7 +11,7 @@ import Logo from "../../assets/logo.png"
 import {observe} from "mobx";
 import {observer} from "mobx-react";
 
-export const ProfileLayout = observer(() => {
+export const ClientProfileLayout = observer(() => {
     const media = useMedia()
 
     if (media.isMobile) {
@@ -91,10 +91,10 @@ const DesktopProfileLayout = observer(() => {
             </NavbarContainer>
             <LayoutContentContainer>
                 <ListWrapper>
-                    <ProfileListItem click={() => navigator("/user/profile")} title="Мои данные"
+                    <ProfileListItem click={() => navigator("/client/profile")} title="Мои данные"
                                      bold={app.section == "my-profile"}/>
 
-                    <ProfileListItem click={() => navigator("/user/resumes")} title="Мои резюме"
+                    <ProfileListItem click={() => navigator("/client/resumes")} title="Мои резюме"
                                      bold={app.section == "my-resumes"}/>
                 </ListWrapper>
                 <ContentWrapper><Outlet/></ContentWrapper>

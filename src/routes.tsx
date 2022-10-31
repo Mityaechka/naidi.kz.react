@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, redirect} from "react-router-dom";
 import {MainPage} from "./pages/client/main-page";
 import {
     Auth,
@@ -9,17 +9,21 @@ import {
     RegisterSMSInput
 } from "./pages/client/auth";
 import {AppLayout} from "./componets/layouts/app-layout";
-import {UserProfileEdit} from "./pages/client/profile/user-profile-edit";
-import {UserProfile} from "./pages/client/profile/user-profile";
-import {UserProfileView} from "./pages/client/profile/user-profile-view";
-import {ProfileLayout} from "./componets/layouts/profile-layout";
-import {UserResumeView} from "./pages/client/resume/user-resume-view";
-import {UserResumeCreate} from "./pages/client/resume/user-resume-create";
-import {UserResumeEdit} from "./pages/client/resume/user-resume-edit";
+import {ClientProfileEdit} from "./pages/client/profile/client-profile-edit";
+import {ClientProfile} from "./pages/client/profile/client-profile";
+import {ClientProfileView} from "./pages/client/profile/client-profile-view";
+import {ClientProfileLayout} from "./componets/layouts/client-profile-layout";
+import {ClientResumeView} from "./pages/client/resume/client-resume-view";
+import {ClientResumeCreate} from "./pages/client/resume/client-resume-create";
+import {ClientResumeEdit} from "./pages/client/resume/client-resume-edit";
 import {AdminLayout} from "./componets/layouts/admin-layout";
 import {ModerationResumeView} from "./pages/user/moderation/moderation-resume-view";
 import {useStores} from "./store/root-store";
-import {ResumeRequestModeration} from "./componets/user/resume-request-moderation";
+import {UsersView} from "./pages/user/users/users-view";
+import {UsersCreate} from "./pages/user/users/users-create";
+import {UsersEdit} from "./pages/user/users/users-edit";
+import {ResumeRequestModeration} from "./pages/user/moderation/resume-request-moderation";
+import {AdminAuth} from "./pages/user/admin-auth";
 
 export const routes = createBrowserRouter([
     {
@@ -38,22 +42,27 @@ export const routes = createBrowserRouter([
             {path: "login/password", element: <LoginPasswordInput/>},
 
             {
-                path: "user", element: <ProfileLayout/>, children: [
-                    {path: "", element: <UserProfile/>},
-                    {path: "profile", element: <UserProfileView/>},
-                    {path: "profile/edit", element: <UserProfileEdit/>},
+                path: "client", element: <ClientProfileLayout/>, children: [
+                    {path: "", element: <ClientProfile/>},
+                    {path: "profile", element: <ClientProfileView/>},
+                    {path: "profile/edit", element: <ClientProfileEdit/>},
 
-                    {path: "resumes", element: <UserResumeView/>},
-                    {path: "resumes/create", element: <UserResumeCreate/>},
-                    {path: "resumes/:resumeId/edit", element: <UserResumeEdit/>},
+                    {path: "resumes", element: <ClientResumeView/>},
+                    {path: "resumes/create", element: <ClientResumeCreate/>},
+                    {path: "resumes/:resumeId/edit", element: <ClientResumeEdit/>},
 
                 ]
             },
+            {path: "admin-auth", element: <AdminAuth/>},
             {
-                path:"admin", element:<AdminLayout/>, children: [
-                    {path:"", element:<></>},
-                    {path:"moderation/resumes", element:<ModerationResumeView/>},
-                    {path:"moderation/resumes/:resumeId", element:<ResumeRequestModeration/>},
+                path: "admin", element: <AdminLayout/>, children: [
+                    {path: "", element: <></>},
+                    {path: "moderation/resumes", element: <ModerationResumeView/>},
+                    {path: "moderation/resumes/:resumeId", element: <ResumeRequestModeration/>},
+
+                    {path: "users", element: <UsersView/>},
+                    {path: "users/create", element: <UsersCreate/>},
+                    {path: "users/:userId/edit", element: <UsersEdit/>},
                 ]
             }
 

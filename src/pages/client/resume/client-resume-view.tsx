@@ -26,7 +26,7 @@ const ResumesWrapper = styled.div`
   }
 `
 
-export const UserResumeView = () => {
+export const ClientResumeView = () => {
     const navigation = useNavigate()
     const {cache, app, modal} = useStores()
 
@@ -36,7 +36,7 @@ export const UserResumeView = () => {
     const [resumes, setResumes] = useState<Resume[] | undefined>(undefined)
 
     const menuItems = <>
-        <MenuItem onClick={() =>  navigation(`/user/resumes/create`)}>Создать резюме</MenuItem>
+        <MenuItem onClick={() =>  navigation(`/client/resumes/create`)}>Создать резюме</MenuItem>
     </>
 
     app.setMenuItems(menuItems)
@@ -46,7 +46,7 @@ export const UserResumeView = () => {
     }, [])
 
     const updateAllResumes = () => {
-        api.resume.getUserResumes().then(resumesResult => {
+        api.resume.getClientResumes().then(resumesResult => {
             if (!resumesResult.isSuccess) {
                 return
             }
@@ -63,7 +63,7 @@ export const UserResumeView = () => {
     }
 
     const editResume = (resume: Resume) => {
-        navigation(`/user/resumes/${resume.id}/edit`)
+        navigation(`/client/resumes/${resume.id}/edit`)
     }
 
     return <ResumesContainer>
@@ -72,14 +72,14 @@ export const UserResumeView = () => {
                 <>
                     {resumes.length == 0 ?
                         <>
-                            <AppButton color="yellow" click={() => navigation("/user/resumes/create")}>Создать нове
+                            <AppButton color="yellow" click={() => navigation("/client/resumes/create")}>Создать нове
                                 резюме</AppButton>
                         </> :
                         <>
                             {resumes.map(resume => <>
                                     <ResumeComponent border="left"
                                                      header={<OwnerHeader date={new Date()}
-                                                                          surname={`${resume.user.firstName} ${resume.user.lastName}`}
+                                                                          surname={`${resume.client.firstName} ${resume.client.lastName}`}
                                                                           menuItems={<>
                                                                               <MenuItem
                                                                                   onClick={() => editResume(resume)}>Редактировать</MenuItem>

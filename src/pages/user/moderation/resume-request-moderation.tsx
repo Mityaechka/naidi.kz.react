@@ -1,14 +1,15 @@
-import {ModerationResumeRequest, RejectReason} from "../../models/user-data";
-import {AppButton} from "../app-input/app-button";
-import {AppInput, AppSelect, AppTextArea} from "../app-input/app-input";
-import {localize} from "../../helpers/localization";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import api from "../../api";
-import styled from "styled-components";
+import {ModerationResumeRequest, RejectReason} from "../../../models/user-data";
+import api from "../../../api";
+import {AppInput, AppSelect, AppTextArea} from "../../../componets/app-input/app-input";
+import {localize} from "../../../helpers/localization";
+import {AppButton} from "../../../componets/app-input/app-button";
+import {useStores} from "../../../store/root-store";
 import {useForm} from "react-hook-form";
-import {ApproveData, RejectData} from "../../api/moderator-api";
-import {useStores} from "../../store/root-store";
+import {RejectData} from "../../../api/moderator-api";
+import styled from "styled-components";
+
 
 export enum ModerationState {
     None,

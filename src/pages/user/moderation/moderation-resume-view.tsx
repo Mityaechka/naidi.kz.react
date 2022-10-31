@@ -12,8 +12,11 @@ import {device} from "../../../hooks/mediaHook";
 import {Menu, MenuButton, MenuItem} from "@szhsin/react-menu";
 import api from "../../../api";
 import {usePermanentToggle} from "../../../hooks/useToggle";
-import {ModerationResumeRequest} from "../../../models/user-data";
-import {ResumeRequestView} from "../../../componets/user/resume-request-view";
+import {ModerationResumeRequest, User, UserRole} from "../../../models/user-data";
+import DataTable, {TableColumn} from "react-data-table-component";
+import {localize} from "../../../helpers/localization";
+import {MoreVertical} from "react-feather";
+import moment from "moment/moment";
 
 
 const ComponentContainer = styled.div`
@@ -51,13 +54,26 @@ export const ModerationResumeView = () => {
         })
     }
 
+    const columns: TableColumn<ModerationResumeRequest>[] = [
+        {
+            name: 'Работа',
+            selector: row => localize(row.resume.activity.name),
+        },
+        {
+            name: 'Время создания',
+            selector: row => moment(row.createdAt).format('DD.MM.yyyy HH:mm'),
+        },
+        {
+            name: '',
+            selector: row => row.id,
+            cell: row => <AppButton fullWidth={false} color="yellow" click={() => navigation(`/admin/moderation/resumes/${row.id}`)}>Проверить</AppButton>
+        }
+    ]
+
 
     return <ComponentContainer>
-        <RequestsWrapper>
-            {requests.map(x => <ResumeRequestView request={x}
-                                                  onClick={() => navigation(`/admin/moderation/resumes/${x.id}`)}/>)}
-
-        </RequestsWrapper>
+        <DataTable data={requests}
+                   columns={columns}/>
 
 
     </ComponentContainer>

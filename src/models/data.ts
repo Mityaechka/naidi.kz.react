@@ -36,7 +36,7 @@ export type Activity = {
     id: string
 }
 
-export type User = {
+export type Client = {
     id: string,
     firstName?: string,
     secondName?: string,
@@ -47,13 +47,13 @@ export type User = {
     destination?: Destination
 }
 
-export namespace User {
-    export const fullName = (user?: User) => {
-        if (!user) {
+export namespace Client {
+    export const fullName = (client?: Client) => {
+        if (!client) {
             return undefined
         }
 
-        return `${user.firstName ?? ''} ${user.secondName ?? ''} ${user.lastName ?? ''}`.trim()
+        return `${client.firstName ?? ''} ${client.secondName ?? ''} ${client.lastName ?? ''}`.trim()
     }
 }
 
@@ -84,7 +84,7 @@ export namespace Destination {
 
 export type Resume = {
     id: string,
-    user: User,
+    client: Client,
     activity: Activity,
     destination: Destination,
     description: string,

@@ -22,10 +22,13 @@ export class ModalStore {
         this.style = style
     }
 
-    showModal(child?: ReactNode) {
+    showModal(child?: ReactNode, style: Styles | undefined = undefined) {
+        this.setStyle(style)
         this.child = child
         this.isOpen = true
     }
+
+
 
     hideModal() {
         this.isOpen = false
@@ -33,3 +36,4 @@ export class ModalStore {
 
 
 }
+

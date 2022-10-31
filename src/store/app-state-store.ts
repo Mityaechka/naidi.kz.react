@@ -9,7 +9,7 @@ export type Breadcrumb = {
     path: string
 }
 
-export type Section = "" | "my-profile" | "my-resumes" | "moderation-resumes"
+export type Section = "" | "my-profile" | "my-resumes" | "moderation-resumes" | "moderation-users"
 
 export class AppStateStore {
 
@@ -89,5 +89,9 @@ export class AppStateStore {
 
 
     }
+}
+
+export const appLoading = (app: AppStateStore) => <T>(promise: Promise<T>) => {
+    return app.withLoading(promise)
 }
 

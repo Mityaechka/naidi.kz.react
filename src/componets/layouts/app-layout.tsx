@@ -5,30 +5,34 @@ import {useStores} from "../../store/root-store";
 import ReactModal from "react-modal";
 import {useEffect} from "react";
 import api from "../../api";
+import {UserRole} from "../../models/user-data";
+import { RoleProvider } from "../roles/RoleContext";
 
 export const AppLayout = observer(() => {
-    const {app, user, modal} = useStores();
+    const {app, client, modal} = useStores();
 
-    useEffect(() =>{
-        api.account.getUser().then(result => {
+    useEffect(() => {
+        api.account.getClient().then(result => {
             if (result.isSuccess) {
-                user.setUser(result.result)
+                client.setClient(result.result)
             } else {
-                user.setUser(undefined)
+                client.setClient(undefined)
             }
         })
     }, [])
 
     return <>
-        {app.loading && <LoadingSpinner/>}
+        <RoleProvider role={UserRole.Moderator}>
+            {app.loading && <LoadingSpinner/>}
 
-        {modal.isOpen && <ReactModal
-            isOpen={modal.isOpen}
-            style={modal.style}>
-            {modal.child}
-        </ReactModal>
-        }
+            {modal.isOpen && <ReactModal
+                isOpen={modal.isOpen}
+                style={modal.style}>
+                {modal.child}
+            </ReactModal>
+            }
 
-        <Outlet/>
+            <Outlet/>
+        </RoleProvider>
     </>
 })

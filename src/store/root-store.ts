@@ -1,4 +1,4 @@
-import {UserStore} from "./user-store";
+import {ClientStore, UserStore} from "./client-store";
 import {createContext, useContext} from "react";
 import {AppStateStore} from "./app-state-store";
 import {ModalStore} from "./modal-store";
@@ -6,15 +6,17 @@ import {CacheStore} from "./cache-store";
 
 export class RootStore {
     public app: AppStateStore;
-    public user: UserStore;
+    public client: ClientStore;
     public modal: ModalStore;
     public cache: CacheStore;
+    public user: UserStore
 
     constructor() {
         this.app = new AppStateStore();
-        this.user = new UserStore();
+        this.client = new ClientStore();
         this.modal = new ModalStore();
         this.cache = new CacheStore();
+        this.user = new UserStore();
     }
 }
 

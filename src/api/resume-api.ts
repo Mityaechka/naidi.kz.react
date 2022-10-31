@@ -8,18 +8,18 @@ export type CreateResumeData = {
     description: string
 }
 
-const getUserResumes = () => apiMethods.get<Resume[]>("api/resume/user")
-const getUserResume = (resumeId: string) => apiMethods.get<Resume>(`api/resume/user/${resumeId}`)
+const getClientResumes = () => apiMethods.get<Resume[]>("api/resume/client")
+const getClientResume = (resumeId: string) => apiMethods.get<Resume>(`api/resume/client/${resumeId}`)
 
-const createResume = (data: CreateResumeData) => apiMethods.post("api/resume/user/create", data)
+const createResume = (data: CreateResumeData) => apiMethods.post("api/resume/client/create", data)
 
-const sendToModeration = (resumeId: string) => apiMethods.post(`api/resume/user/${resumeId}/moderation`, {})
-const editResume = (resumeId: string, data: CreateResumeData) => apiMethods.post(`api/resume/user/${resumeId}/edit`, data)
+const sendToModeration = (resumeId: string) => apiMethods.post(`api/resume/client/${resumeId}/moderation`, {})
+const editResume = (resumeId: string, data: CreateResumeData) => apiMethods.post(`api/resume/client/${resumeId}/edit`, data)
 
 export const resumeApi = {
-    getUserResumes,
+    getClientResumes,
     createResume,
     sendToModeration,
-    getUserResume,
+    getClientResume,
     editResume
 }

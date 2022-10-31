@@ -1,9 +1,9 @@
 import {useForm} from "react-hook-form";
 import {useStores} from "../../../store/root-store";
 import React, {useEffect, useMemo, useState} from "react";
-import {Activity, Area, City, Gender, User} from "../../../models/data";
+import {Activity, Area, City, Gender, Client} from "../../../models/data";
 
-import {EditUserProfile} from "../../../api/user-api";
+import {EditClientProfile} from "../../../api/client-api";
 import {Block} from "../../../componets/Block";
 import {AppInput, AppSelect, AppTextArea, SelectOption} from "../../../componets/app-input/app-input";
 import {AppButton} from "../../../componets/app-input/app-button";
@@ -12,7 +12,7 @@ import api from "../../../api";
 import {log} from "util";
 import {useNavigate} from "react-router-dom";
 
-export const UserResumeCreate = () => {
+export const ClientResumeCreate = () => {
     const {register, watch, handleSubmit, formState: {errors}, setValue,} = useForm();
     const navigation = useNavigate()
 
@@ -22,7 +22,7 @@ export const UserResumeCreate = () => {
     app.setSection("my-resumes")
     app.clearMenuItems()
 
-    const [user, setUser] = useState<User>({} as User)
+    const [client, setClient] = useState<Client>({} as Client)
 
     const [cities, setCities] = useState<City[]>([]);
     const [areas, setAreas] = useState<Area[]>([]);
@@ -45,29 +45,29 @@ export const UserResumeCreate = () => {
     }), [activities])
 
     useEffect(() => {
-        setValue("destination.areaId", user.destination?.area?.id)
-        setValue("destination.cityId", user.destination?.city?.id)
-    }, [user])
+        setValue("destination.areaId", client.destination?.area?.id)
+        setValue("destination.cityId", client.destination?.city?.id)
+    }, [client])
 
     useEffect(() => {
         const areasPromise = cache.getAllAreas();
         const citiesPromise = cache.getAllCities();
         const activitiesPromise = cache.getAllActivities();
-        const userPromise = api.account.getUser();
+        const clientPromise = api.account.getClient();
 
         app.showLoading()
-        Promise.all([areasPromise, citiesPromise, activitiesPromise, userPromise]).then(result => {
+        Promise.all([areasPromise, citiesPromise, activitiesPromise, clientPromise]).then(result => {
             app.hideLoading()
 
-            const [areasResult, citiesResult, activitiesResult, userResult] = result
+            const [areasResult, citiesResult, activitiesResult, clientResult] = result
 
-            if (!areasResult || !citiesResult || !activitiesResult || !userResult.isSuccess) {
+            if (!areasResult || !citiesResult || !activitiesResult || !clientResult.isSuccess) {
                 return
             }
 
             setCities(citiesResult)
             setAreas(areasResult)
-            setUser(userResult.result)
+            setClient(clientResult.result)
             setActivities(activitiesResult)
 
         })
@@ -80,7 +80,7 @@ export const UserResumeCreate = () => {
                 return
             }
 
-            navigation('/user/resumes')
+            navigation('/client/resumes')
         })
     };
 

@@ -10,6 +10,10 @@ import {useMedia} from "./hooks/mediaHook";
 import {RootStore, StoreContext} from "./store/root-store";
 import moment from "moment";
 import "@szhsin/react-menu/dist/index.css";
+import {observable} from "mobx";
+import {RoleProvider} from "./componets/roles/RoleContext";
+import {UserRole} from "./models/user-data";
+
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 Modal.setAppElement('#root');
 
@@ -28,6 +32,12 @@ export const theme: DefaultTheme = {
 
 moment.locale('ru');
 
+export const App = observable(() => {
+    return <>
+        <RouterProvider router={routes}/>
+    </>
+})
+
 root.render(
     <>
         <ThemeProvider theme={theme}>
@@ -37,3 +47,5 @@ root.render(
         </ThemeProvider>
     </>
 );
+
+

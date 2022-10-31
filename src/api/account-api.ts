@@ -1,6 +1,6 @@
 import {apiMethods} from "./api-methods";
 import {stringify} from "querystring";
-import {User} from "../models/data";
+import {Client} from "../models/data";
 
 const checkPhone = (phone: string) => apiMethods.post<unknown>('api/account/check-phone', {phone});
 
@@ -12,7 +12,7 @@ const register = (data: {phone: string, sms: string, password: string}) => apiMe
 
 const login = (data: {phone: string, password: string}) => apiMethods.post<string>('api/account/login', data);
 
-const getUser = () => apiMethods.get<User>('api/account/user');
+const getClient = () => apiMethods.get<Client>('api/account/client');
 
 export const accountApi = {
     checkPhone,
@@ -20,5 +20,5 @@ export const accountApi = {
     checkVerificationSms,
     register,
     login,
-    getUser
+    getClient: getClient
 }

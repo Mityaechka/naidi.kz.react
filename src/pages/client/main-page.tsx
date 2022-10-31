@@ -196,7 +196,7 @@ const JobTitle = styled.p`
 
 
 export const MainPage = observer(() => {
-    const {app, user, modal} = useStores()
+    const {app, client, modal} = useStores()
     const {isTabletOrDesktop, isMobile} = useMedia()
     const activities: Activity[] = [
         {
@@ -274,16 +274,16 @@ export const MainPage = observer(() => {
 
     }
 
-    const openProfile = () => navigator("/user")
+    const openProfile = () => navigator("/client")
 
 
     return <PageWrapper>
         <AppBar>
             <AppBarLogo src={Logo}/>
             <div>
-                {!user.isAuth && <AppButton color="black" fullWidth={false} click={openAuth}>Войти</AppButton>}
+                {!client.isAuth && <AppButton color="black" fullWidth={false} click={openAuth}>Войти</AppButton>}
 
-                {user.isAuth && <AppButton color="yellow" fullWidth={false} click={openProfile}>Профиль</AppButton>}
+                {client.isAuth && <AppButton color="yellow" fullWidth={false} click={openProfile}>Профиль</AppButton>}
 
             </div>
         </AppBar>

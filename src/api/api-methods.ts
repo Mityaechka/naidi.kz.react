@@ -46,6 +46,11 @@ const sendApiRequest = async <T>(method: string, url: string, data: any): Promis
     })
 }
 
+export enum Area {
+    Client,
+    User
+}
+
 const sendApiGet = <T>(url: string) => sendApiRequest<T>('GET', url, undefined)
 const sendApiPost = <T>(url: string, data: any) => sendApiRequest<T>('POST', url, data)
 

@@ -1,6 +1,6 @@
 import {AppInput} from "../../../componets/app-input/app-input";
 import {formatPhoneNumber} from "../../../helpers/phone-helpers";
-import {Gender, User} from "../../../models/data";
+import {Gender, Client} from "../../../models/data";
 import styled from "styled-components";
 import {AppButton} from "../../../componets/app-input/app-button";
 
@@ -33,7 +33,7 @@ const AvatarWrapper = styled.img`
   height: 96px;
 `
 
-export const UserProfileView = () => {
+export const ClientProfileView = () => {
 
     const navigator = useNavigate()
     const {app} = useStores();
@@ -42,36 +42,36 @@ export const UserProfileView = () => {
     app.setSection("my-profile")
     app.clearMenuItems()
 
-    const [user, setUser] = useState<User | undefined>(undefined)
+    const [client, setClient] = useState<Client | undefined>(undefined)
     useEffect(() => {
         console.log("render")
-        api.account.getUser().then(result => {
+        api.account.getClient().then(result => {
             if (!result.isSuccess) {
                 return;
             }
 
-            setUser(result.result)
+            setClient(result.result)
         })
     }, [])
 
-    console.log(user)
+
     return <>
         <ProfileContainer>
             <div>
-                <AppInput field="fio" label="ФИО" disabled={true} value={User.fullName(user)}/>
+                <AppInput field="fio" label="ФИО" disabled={true} value={Client.fullName(client)}/>
                 <AppInput field="phoneNumber" label="Мобильный телефон" disabled={true}
-                          value={formatPhoneNumber(user?.phone)}/>
+                          value={formatPhoneNumber(client?.phone)}/>
                 {/*<AppInput field="birthData" label="Дата рождения" disabled={true}*/}
-                {/*          value={user?.birthDate ? moment(user?.birthDate).format("DD.MM.yyyy") : ""}/>*/}
+                {/*          value={client?.birthDate ? moment(client?.birthDate).format("DD.MM.yyyy") : ""}/>*/}
 
                 <AppInput field="gender" label="Пол" disabled={true}
-                          value={Gender.toNameString(user?.gender) ?? "Не указан"}/>
+                          value={Gender.toNameString(client?.gender) ?? "Не указан"}/>
 
-                <AppInput field="areaId" label="Область" disabled={true} value={user?.destination?.area?.name?.ru}/>
+                <AppInput field="areaId" label="Область" disabled={true} value={client?.destination?.area?.name?.ru}/>
 
-                <AppInput field="cityId" label="Город" disabled={true} value={user?.destination?.city?.name?.ru}/>
+                <AppInput field="cityId" label="Город" disabled={true} value={client?.destination?.city?.name?.ru}/>
 
-                <AppButton color="yellow" click={() => navigator("/user/profile/edit")}>Редактировать</AppButton>
+                <AppButton color="yellow" click={() => navigator("/client/profile/edit")}>Редактировать</AppButton>
             </div>
             <AvatarContainer>
                 <AvatarWrapper src={Avatar}/>

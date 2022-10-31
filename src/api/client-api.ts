@@ -1,6 +1,6 @@
 import {apiMethods} from "./api-methods";
 import {Gender} from "../models/data";
-export type EditUserProfile = {
+export type EditClientProfile = {
     firstName: string,
     lastName: string,
     secondName: string,
@@ -10,8 +10,8 @@ export type EditUserProfile = {
     cityId?: string
 }
 
-const editUserProfile = (data: EditUserProfile) => apiMethods.post('api/user/profile/edit', data);
+const editClientProfile = (data: EditClientProfile) => apiMethods.post('api/client/profile/edit', data);
 
-export const userApi = {
-    editUserProfile
+export const clientApi = {
+    editClientProfile
 }

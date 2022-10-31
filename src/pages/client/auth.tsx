@@ -298,7 +298,7 @@ export const RegisterPasswordInput = ({
     const {register, watch, handleSubmit,} = useForm();
 
     const navigate = useNavigate()
-    const {app, user} = useStores()
+    const {app, client} = useStores()
     const [password, setPassword] = useState("")
     const isPasswordValid = useMemo(() => password.length >= 8, [password])
 
@@ -320,15 +320,15 @@ export const RegisterPasswordInput = ({
                 return
             }
 
-            user.setJwt(result.result!)
+            client.setJwt(result.result!)
 
             app.showLoading()
 
-            api.account.getUser().then(userResult => {
+            api.account.getClient().then(clientResult => {
                 app.hideLoading();
 
-                if (userResult.isSuccess) {
-                    user.setUser(userResult.result)
+                if (clientResult.isSuccess) {
+                    client.setClient(clientResult.result)
                 }
 
                 if (next) {
@@ -419,7 +419,7 @@ export const LoginPasswordInput = ({
     const {register, watch, handleSubmit} = useForm();
 
     const navigate = useNavigate()
-    const {app, user} = useStores()
+    const {app, client} = useStores()
     const [password, setPassword] = useState("")
     const isPasswordValid = useMemo(() => password.length >= 8, [password])
 
@@ -441,15 +441,15 @@ export const LoginPasswordInput = ({
                 return
             }
 
-            user.setJwt(result.result!)
+            client.setJwt(result.result!)
 
             app.showLoading()
 
-            api.account.getUser().then(userResult => {
+            api.account.getClient().then(clientResult => {
                 app.hideLoading();
 
-                if (userResult.isSuccess) {
-                    user.setUser(userResult.result)
+                if (clientResult.isSuccess) {
+                    client.setClient(clientResult.result)
                 }
 
                 if (next) {

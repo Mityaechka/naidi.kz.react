@@ -1,7 +1,7 @@
 import {MobileLayout} from "../../../componets/layouts/mobile-layout";
 import {MobileBar} from "../../../componets/mobile-bar";
 import {Block} from "../../../componets/Block";
-import {Area, City, Gender, User} from "../../../models/data";
+import {Area, City, Gender, Client} from "../../../models/data";
 import React, {ForwardedRef, ReactNode, useEffect, useMemo, useState} from "react";
 import {values} from "mobx";
 import {FieldErrors, FieldValues, useForm, useFormContext} from "react-hook-form";
@@ -11,18 +11,19 @@ import {AppButton} from "../../../componets/app-input/app-button";
 import {Simulate} from "react-dom/test-utils";
 import submit = Simulate.submit;
 import {useStores} from "../../../store/root-store";
-import {EditUserProfile} from "../../../api/user-api";
+import {EditClientProfile} from "../../../api/client-api";
 import {useNavigate} from "react-router-dom";
 import api from "../../../api";
+import {usePromises} from "../../../hooks/usePromises";
 
 
-export const UserProfileEdit = () => {
+export const ClientProfileEdit = () => {
     const {register, watch, handleSubmit, formState: {errors}, setValue, } = useForm();
     const navigate = useNavigate()
 
     const {app, cache} = useStores();
 
-    const [user, setUser] = useState<User>({} as User)
+    const [client, setClient] = useState<Client>({} as Client)
 
     const [cities, setCities] = useState<City[]>([]);
     const [areas, setAreas] = useState<Area[]>([]);
@@ -43,35 +44,29 @@ export const UserProfileEdit = () => {
     }), [areas])
 
     useEffect(() => {
-        setValue("firstName", user.firstName)
-        setValue("secondName", user.secondName)
-        setValue("lastName", user.lastName)
-        setValue("gender", user.gender)
-        setValue("areaId", user.destination?.area?.id)
-        setValue("cityId", user.destination?.city?.id)
-    }, [user])
+        setValue("firstName", client.firstName)
+        setValue("secondName", client.secondName)
+        setValue("lastName", client.lastName)
+        setValue("gender", client.gender)
+        setValue("areaId", client.destination?.area?.id)
+        setValue("cityId", client.destination?.city?.id)
+    }, [client])
 
 
     useEffect(() => {
-        const areasPromise = cache.getAllAreas();
-        const citiesPromise = cache.getAllCities();
-        const userPromise = api.account.getUser();
+        app.withLoading(Promise.all([cache.getAllAreas(), cache.getAllCities(), api.account.getClient()]))
+            .then(result => {
 
-        app.showLoading()
-        Promise.all([areasPromise, citiesPromise, userPromise]).then(result => {
-            app.hideLoading()
+            const [areasResult, citiesResult, clientResult] = result
 
-            const [areasResult, citiesResult, userResult] = result
-
-            if (!areasResult || !citiesResult || !userResult.isSuccess) {
+            if (!areasResult || !citiesResult || !clientResult.isSuccess) {
                 return
             }
 
-            const newUser = userResult.result!
 
             setCities(citiesResult)
             setAreas(areasResult)
-            setUser(userResult.result!)
+            setClient(clientResult.result!)
 
 
         })
@@ -84,9 +79,9 @@ export const UserProfileEdit = () => {
 
     const onSubmit = (data: any) => {
         console.log(data)
-        api.user.editUserProfile(data as EditUserProfile).then(result => {
+        api.client.editClientProfile(data as EditClientProfile).then(result => {
             console.log(result)
-            navigate("/user/profile/")
+            navigate("/client/profile/")
         })
         //appState.showLoading()
     };

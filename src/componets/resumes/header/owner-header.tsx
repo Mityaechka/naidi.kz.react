@@ -5,7 +5,7 @@ import {DollarSign, MoreVertical} from "react-feather";
 import {Menu, MenuItem} from "@szhsin/react-menu";
 import {ReactNode} from "react";
 
-const UserAvatar = styled.img`
+const ClientAvatar = styled.img`
   width: 30px;
   height: 30px;
 `
@@ -47,7 +47,7 @@ export const OwnerHeader = ({
                                }: { surname: string, date: Date, menuItems?: ReactNode }) => {
     return <>
         <Container>
-            <UserAvatar src={Avatar}/>
+            <ClientAvatar src={Avatar}/>
 
             <DescriptionContainer>
                 <Surname>{surname}</Surname>
