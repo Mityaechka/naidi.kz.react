@@ -3,6 +3,7 @@ import {createContext, ReactNode, useContext} from "react";
 import {apiMethods} from "../api/api-methods";
 import {RootStore} from "./root-store";
 import {Observer} from "mobx-react";
+import {PopupMenuItem} from "../componets/popup-menu/popup-menu";
 
 export type Breadcrumb = {
     title: string,
@@ -21,7 +22,7 @@ export class AppStateStore {
 
     phone?: string
     phoneCode?: string
-    pageMenuItems?: ReactNode
+    pageMenuItems?: PopupMenuItem[]
 
     constructor() {
         makeObservable(this, {
@@ -58,7 +59,7 @@ export class AppStateStore {
         this.phone = phone;
     }
 
-    setMenuItems(value: ReactNode) {
+    setMenuItems(value: PopupMenuItem[]) {
         this.pageMenuItems = value
     }
 

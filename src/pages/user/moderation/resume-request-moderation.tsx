@@ -47,8 +47,8 @@ export const ResumeRequestModeration = () => {
         <AppTextArea field="description" label="Описание" value={request.resume.description.source} disabled={true}/>
 
         <ButtonsContainer>
-            <AppButton color="yellow" click={() => setModerationState(ModerationState.Approve)}>К публикацие</AppButton>
-            <AppButton color="black" click={() => setModerationState(ModerationState.Reject)}>К отказу</AppButton>
+            <AppButton color="yellow" click={() => setModerationState(ModerationState.Approve)}>Публикация</AppButton>
+            <AppButton color="black" click={() => setModerationState(ModerationState.Reject)}>Отказ</AppButton>
         </ButtonsContainer>
         {moderationState == ModerationState.Approve && <ResumeApproveComponent request={request}/>}
         {moderationState == ModerationState.Reject && <ResumeRejectComponent request={request}/>}

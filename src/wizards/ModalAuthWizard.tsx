@@ -32,15 +32,15 @@ export const ModalAuthWizard = ({modalStore}: { modalStore: ModalStore }) => {
         },
     };
 
-    const auth = () => modalStore.showModal(<Auth closeClick={close} register={register} login={login}/>);
+    const auth = () => modalStore.showModal(<Auth closeClick={close} register={register} login={login}/>, style);
 
-    const register = () => modalStore.showModal(<RegisterByPhone closeClick={close} backClick={auth} next={registerSmsInput}/>)
-    const login = () => modalStore.showModal(<LoginByPhone closeClick={close} backClick={auth} next={loginPasswordInput}/>)
+    const register = () => modalStore.showModal(<RegisterByPhone closeClick={close} backClick={auth} next={registerSmsInput}/>, style)
+    const login = () => modalStore.showModal(<LoginByPhone closeClick={close} backClick={auth} next={loginPasswordInput}/>, style)
 
-    const registerSmsInput = () => modalStore.showModal(<RegisterSMSInput closeClick={close} backClick={register} next={registerPasswordInput}/>)
-    const registerPasswordInput = () => modalStore.showModal(<RegisterPasswordInput closeClick={close} backClick={registerSmsInput} next={closeModal}/>)
+    const registerSmsInput = () => modalStore.showModal(<RegisterSMSInput closeClick={close} backClick={register} next={registerPasswordInput}/>, style)
+    const registerPasswordInput = () => modalStore.showModal(<RegisterPasswordInput closeClick={close} backClick={registerSmsInput} next={closeModal}/>, style)
 
-    const loginPasswordInput = () => modalStore.showModal(<LoginPasswordInput closeClick={close} backClick={auth} next={closeModal}/>)
+    const loginPasswordInput = () => modalStore.showModal(<LoginPasswordInput closeClick={close} backClick={auth} next={closeModal}/>, style)
 
     const closeModal = () => modalStore.hideModal()
 

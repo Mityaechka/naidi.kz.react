@@ -24,6 +24,7 @@ import {UsersCreate} from "./pages/user/users/users-create";
 import {UsersEdit} from "./pages/user/users/users-edit";
 import {ResumeRequestModeration} from "./pages/user/moderation/resume-request-moderation";
 import {AdminAuth} from "./pages/user/admin-auth";
+import {ResumeSearch} from "./pages/client/resume/resume-search";
 
 export const routes = createBrowserRouter([
     {
@@ -40,6 +41,8 @@ export const routes = createBrowserRouter([
 
             {path: "login", element: <LoginByPhone/>},
             {path: "login/password", element: <LoginPasswordInput/>},
+
+            {path: "resume/search", element: <ResumeSearch/>},
 
             {
                 path: "client", element: <ClientProfileLayout/>, children: [

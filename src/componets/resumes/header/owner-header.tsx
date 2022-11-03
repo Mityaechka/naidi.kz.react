@@ -4,6 +4,7 @@ import moment from "moment";
 import {DollarSign, MoreVertical} from "react-feather";
 import {Menu, MenuItem} from "@szhsin/react-menu";
 import {ReactNode} from "react";
+import {PopupMenu, PopupMenuItem} from "../../popup-menu/popup-menu";
 
 const ClientAvatar = styled.img`
   width: 30px;
@@ -36,15 +37,13 @@ const Date = styled.span`
   color: rgba(32, 32, 32, 0.5);
 `
 
-const Icon = styled(MoreVertical)`
-  margin-left: auto;
-`
+
 
 export const OwnerHeader = ({
-                                   surname,
-                                   date,
-                                   menuItems = undefined
-                               }: { surname: string, date: Date, menuItems?: ReactNode }) => {
+                                surname,
+                                date,
+                                menuItems
+                            }: { surname: string, date: Date, menuItems?: PopupMenuItem[] }) => {
     return <>
         <Container>
             <ClientAvatar src={Avatar}/>
@@ -55,9 +54,7 @@ export const OwnerHeader = ({
 
             </DescriptionContainer>
             {menuItems &&
-                <Menu menuButton={<Icon/>} transition direction="left">
-                    {menuItems}
-                </Menu>
+                <PopupMenu items={menuItems}/>
             }
         </Container>
     </>

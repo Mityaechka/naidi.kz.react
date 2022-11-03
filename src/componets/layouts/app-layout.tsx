@@ -6,10 +6,10 @@ import ReactModal from "react-modal";
 import {useEffect} from "react";
 import api from "../../api";
 import {UserRole} from "../../models/user-data";
-import { RoleProvider } from "../roles/RoleContext";
+import {RoleProvider} from "../roles/RoleContext";
 
 export const AppLayout = observer(() => {
-    const {app, client, modal} = useStores();
+    const {app, client, modal, user} = useStores();
 
     useEffect(() => {
         api.account.getClient().then(result => {
@@ -22,7 +22,7 @@ export const AppLayout = observer(() => {
     }, [])
 
     return <>
-        <RoleProvider role={UserRole.Moderator}>
+        <RoleProvider role={user.user?.role ?? UserRole.None}>
             {app.loading && <LoadingSpinner/>}
 
             {modal.isOpen && <ReactModal

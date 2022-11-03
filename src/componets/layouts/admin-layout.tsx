@@ -1,5 +1,5 @@
 import {useStores} from "../../store/root-store";
-import {Navigate, Outlet, Route, useNavigate} from "react-router-dom";
+import {Navigate, Outlet, useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {useRouteChange} from "../../hooks/useRouteChange";
 import {ProfileListItem} from "../profile-list-item";
@@ -7,12 +7,10 @@ import Logo from "../../assets/logo.png"
 import {observer} from "mobx-react";
 import {Only} from "../roles/RoleContext";
 import {UserRole} from "../../models/user-data";
-import {Navigation} from "react-feather";
-
-import { redirect } from 'react-router-dom';
 import {useEffect, useState} from "react";
 import {LoadingSpinner} from "../loading-spinner";
 import api from "../../api";
+
 const LayoutContainer = styled.div`
   margin: 0 10px;
   height: 100%;
@@ -60,9 +58,9 @@ export const AdminLayout = observer(() => {
 
     const [location] = useRouteChange();
 
-    useEffect(() =>{
+    useEffect(() => {
         api.admin.getAuthUser().then(result => {
-            if(!result.isSuccess){
+            if (!result.isSuccess) {
                 setAuth(false)
                 return
             }
@@ -70,34 +68,38 @@ export const AdminLayout = observer(() => {
             setAuth(true)
             user.setUser(result.result)
         })
-    },[])
+    }, [])
 
 
-    if(isAuth == undefined) {
+    if (isAuth == undefined) {
         return <LoadingSpinner/>
     }
 
-    if(!isAuth){
-        return  <Navigate to='/admin-auth'/>
+    if (!isAuth) {
+        return <Navigate to='/admin-auth'/>
     }
 
 
     return <>
-            <LayoutContainer>
-                <NavbarContainer>
-                    <LogoImg src={Logo} onClick={() => navigator("/")}/>
-                </NavbarContainer>
-                <LayoutContentContainer>
-                    <ListWrapper>
+        <LayoutContainer>
+            <NavbarContainer>
+                <LogoImg src={Logo} onClick={() => navigator("/")}/>
+            </NavbarContainer>
+            <LayoutContentContainer>
+                <ListWrapper>
+                    <Only to={UserRole.Moderator}>
                         <ProfileListItem click={() => navigator("/admin/moderation/resumes")} title="Модерация резюме"
                                          bold={app.section == "moderation-resumes"}/>
+                    </Only>
 
+                    <Only to={UserRole.Admin}>
                         <ProfileListItem click={() => navigator("/admin/users")}
                                          title="Пользователи"
                                          bold={app.section == "moderation-users"}/>
-                    </ListWrapper>
-                    <ContentWrapper><Outlet/></ContentWrapper>
-                </LayoutContentContainer>
-            </LayoutContainer>
+                    </Only>
+                </ListWrapper>
+                <ContentWrapper><Outlet/></ContentWrapper>
+            </LayoutContentContainer>
+        </LayoutContainer>
     </>
 })

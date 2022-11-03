@@ -6,7 +6,7 @@ import {User, UserRole} from "../../../models/user-data";
 import {AppButton} from "../../../componets/app-input/app-button";
 import {isEmail} from "../../../helpers/forms";
 import {showAlert} from "../../../componets/modals/AlertModal";
-import {CreateUserModel} from "../../../api/admin-api";
+import {CreateUserModel, EditUserModel} from "../../../api/admin-api";
 import api from "../../../api";
 import {useEffect, useState} from "react";
 import {useApiCall} from "../../../hooks/usePromises";
@@ -21,7 +21,6 @@ export const UsersEdit = ({}: {}) => {
 
     const [user, userFetch] = useApiCall(undefined, api.admin.getUser(userId as string), appLoading(app))
 
-    userFetch()
 
     useEffect(() => {
         if(!user){
@@ -37,7 +36,7 @@ export const UsersEdit = ({}: {}) => {
 
     const save = (data: any) => {
         console.log(data)
-        app.withLoading(api.admin.createUser(data as CreateUserModel)).then(result => {
+        app.withLoading(api.admin.editUser(userId as string,data as EditUserModel)).then(result => {
             if (!result.isSuccess) {
                 return
             }

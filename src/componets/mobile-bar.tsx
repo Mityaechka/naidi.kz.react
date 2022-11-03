@@ -5,6 +5,7 @@ import {AppIconButton} from "./app-input/app-button";
 import CloseIcon from "../assets/icons/close-btn-icon.png";
 import {Menu} from "@szhsin/react-menu";
 import styled from "styled-components";
+import {PopupMenu, PopupMenuItem} from "./popup-menu/popup-menu";
 
 const MobileBarContainer = styled.div`
     margin: 0;
@@ -41,8 +42,8 @@ const MobileBarTitle = styled.h1`
 export const MobileBar = ({
                               title,
                               backClick = undefined,
-                              menuItems = undefined
-                          }: { title: string, backClick?: Action, menuItems?: ReactNode }) => {
+                              menuItems
+                          }: { title: string, backClick?: Action, menuItems?: PopupMenuItem[] }) => {
 
     return <MobileBarContainer>
         <ButtonContainer>
@@ -54,9 +55,7 @@ export const MobileBar = ({
 
         <ButtonContainer>
             {menuItems &&
-                <Menu menuButton={<MoreVertical/>} transition direction="left">
-                    {menuItems}
-                </Menu>
+                <PopupMenu items={menuItems}/>
             }
         </ButtonContainer>
 

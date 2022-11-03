@@ -12,6 +12,7 @@ import {device} from "../../../hooks/mediaHook";
 import {Menu, MenuButton, MenuItem} from "@szhsin/react-menu";
 import api from "../../../api";
 import {usePermanentToggle} from "../../../hooks/useToggle";
+import {PopupMenuItem} from "../../../componets/popup-menu/popup-menu";
 
 
 const ResumesContainer = styled.div`
@@ -35,11 +36,9 @@ export const ClientResumeView = () => {
 
     const [resumes, setResumes] = useState<Resume[] | undefined>(undefined)
 
-    const menuItems = <>
-        <MenuItem onClick={() =>  navigation(`/client/resumes/create`)}>Создать резюме</MenuItem>
-    </>
-
-    app.setMenuItems(menuItems)
+    app.setMenuItems([
+        {title: 'Создать резюме', onClick: () => navigation(`/client/resumes/create`)}
+    ])
 
     useEffect(() => {
         updateAllResumes()
@@ -80,15 +79,17 @@ export const ClientResumeView = () => {
                                     <ResumeComponent border="left"
                                                      header={<OwnerHeader date={new Date()}
                                                                           surname={`${resume.client.firstName} ${resume.client.lastName}`}
-                                                                          menuItems={<>
-                                                                              <MenuItem
-                                                                                  onClick={() => editResume(resume)}>Редактировать</MenuItem>
-                                                                              {resume.state == ResumeState.Editing &&
-                                                                                  <MenuItem
-                                                                                      onClick={() => sendResumeToModeration(resume)}>Отправить
-                                                                                      на модерацию</MenuItem>}
-                                                                          </>
-                                                                          }
+                                                                          menuItems={[
+                                                                              {
+                                                                                  title: 'Редактировать',
+                                                                                  onClick: () => editResume(resume)
+                                                                              },
+                                                                              resume.state == ResumeState.Editing ?
+                                                                                  {
+                                                                                      title: 'Отправить на модерацию',
+                                                                                      onClick: () => sendResumeToModeration(resume)
+                                                                                  } : undefined
+                                                                          ]}
                                                      />
                                                      }
                                                      body={<OwnerBody resume={resume}/>}

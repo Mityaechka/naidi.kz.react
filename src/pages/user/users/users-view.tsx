@@ -11,6 +11,7 @@ import {AppButton} from "../../../componets/app-input/app-button";
 import styled from "styled-components";
 import {useApiCall} from "../../../hooks/usePromises";
 import {appLoading} from "../../../store/app-state-store";
+import {log} from "util";
 
 export const UsersView = ({}: {}) => {
     const navigation = useNavigate()
@@ -21,8 +22,7 @@ export const UsersView = ({}: {}) => {
 
     const [users, usersFetch] = useApiCall([],api.admin.getUsers(), appLoading(app))
 
-    usersFetch()
-
+    console.log(users)
     const columns: TableColumn<User>[] = [
         {
             name: 'ФИО',

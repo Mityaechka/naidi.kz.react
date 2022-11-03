@@ -48,7 +48,7 @@ export const ClientResumeEdit = () => {
             setValue("activityId", resume.activity.id)
             setValue("destination.areaId", resume.destination.area?.id)
             setValue("destination.cityId", resume.destination.city?.id)
-            setValue("description", resume.description)
+            setValue("description", resume.description.ru)
         },
         [resume])
 

@@ -87,7 +87,7 @@ export type Resume = {
     client: Client,
     activity: Activity,
     destination: Destination,
-    description: string,
+    description: Localized,
     state: ResumeState
 }
 
