@@ -1,9 +1,9 @@
 const dev = {
-    baseUrl: 'https://localhost:44343',
+	baseUrl: 'https://localhost:44343',
 }
 
 const prod = {
-    baseUrl: 'https://naidi.kz',
+	baseUrl: 'https://naidi.kz',
 }
 
 

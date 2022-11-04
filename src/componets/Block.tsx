@@ -1,4 +1,4 @@
-import {CSSProperties, ReactNode} from "react";
+import {CSSProperties, ReactNode} from 'react'
 
 export type BlockProps = {
     children: ReactNode,
@@ -7,14 +7,14 @@ export type BlockProps = {
 }
 
 export const Block = ({children, centred = false, style = undefined}: BlockProps) => {
-    return <div className={`block ${!centred ? '' : 'block__centred'}`} style={style}>{children}</div>
+	return <div className={`block ${!centred ? '' : 'block__centred'}`} style={style}>{children}</div>
 }
 
 export const FlexContainer = ({
-                                  children,
+	children,
 
-                              }: { children: ReactNode, }) => {
-    return <div className="flex-container__space">
-        {children}
-    </div>
+}: { children: ReactNode, }) => {
+	return <div className="flex-container__space">
+		{children}
+	</div>
 }

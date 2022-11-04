@@ -1,4 +1,4 @@
-import {localize} from "../helpers/localization";
+import {localize} from '../helpers/localization'
 
 export enum Gender {
     Male,
@@ -7,16 +7,16 @@ export enum Gender {
 
 export namespace Gender {
     export const toNameString = (gender?: Gender) => {
-        if (gender == undefined) {
-            return "";
-        }
+    	if (gender == undefined) {
+    		return ''
+    	}
 
-        switch (gender) {
-            case Gender.Female:
-                return "Жен."
-            case Gender.Male:
-                return "Муж."
-        }
+    	switch (gender) {
+    	case Gender.Female:
+    		return 'Жен.'
+    	case Gender.Male:
+    		return 'Муж.'
+    	}
     }
 }
 
@@ -49,11 +49,11 @@ export type Client = {
 
 export namespace Client {
     export const fullName = (client?: Client) => {
-        if (!client) {
-            return undefined
-        }
+    	if (!client) {
+    		return undefined
+    	}
 
-        return `${client.firstName ?? ''} ${client.secondName ?? ''} ${client.lastName ?? ''}`.trim()
+    	return `${client.firstName ?? ''} ${client.secondName ?? ''} ${client.lastName ?? ''}`.trim()
     }
 }
 
@@ -64,21 +64,21 @@ export type Destination = {
 
 export namespace Destination {
     export const fullDestination = (destination?: Destination) => {
-        if(!destination){
-            return "";
-        }
+    	if(!destination){
+    		return ''
+    	}
 
-        let value = [];
+    	const value = []
 
-        if(destination.area){
-            value.push(localize(destination?.area?.name))
-        }
+    	if(destination.area){
+    		value.push(localize(destination?.area?.name))
+    	}
 
-        if(destination.city){
-            value.push(localize(destination.city?.name))
-        }
+    	if(destination.city){
+    		value.push(localize(destination.city?.name))
+    	}
 
-        return value.join(", ").trim()
+    	return value.join(', ').trim()
     }
 }
 
@@ -105,19 +105,19 @@ export enum ResumeState {
 
 export namespace ResumeState {
     export const toLocalized = (state: ResumeState): Localized => {
-        if (state == ResumeState.Editing) {
-            return {ru: 'Редактируется', kz: 'Редактируется'}
-        }
+    	if (state == ResumeState.Editing) {
+    		return {ru: 'Редактируется', kz: 'Редактируется'}
+    	}
 
-        if (state == ResumeState.Moderation) {
-            return {ru: 'На модерации', kz: 'На модерации'}
-        }
+    	if (state == ResumeState.Moderation) {
+    		return {ru: 'На модерации', kz: 'На модерации'}
+    	}
 
-        if (state == ResumeState.Rejected) {
-            return {ru: 'Отклонено', kz: 'Отклонено'}
-        }
+    	if (state == ResumeState.Rejected) {
+    		return {ru: 'Отклонено', kz: 'Отклонено'}
+    	}
 
-        return {ru: 'Опубликовано', kz: 'Опубликовано'}
+    	return {ru: 'Опубликовано', kz: 'Опубликовано'}
 
 
     }

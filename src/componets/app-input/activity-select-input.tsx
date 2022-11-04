@@ -1,7 +1,7 @@
-import {Activity} from "../../models/data";
-import {Badge} from "../badge";
-import {useArrayState} from "../../hooks/useArrayState";
-import styled from "styled-components";
+import {Activity} from '../../models/data'
+import {Badge} from '../badge'
+import {useArrayState} from '../../hooks/useArrayState'
+import styled from 'styled-components'
 
 const ActivitySelectContainer = styled.div`
   display: flex;
@@ -12,23 +12,23 @@ const ActivitySelectContainer = styled.div`
 
 
 export const ActivitySelectInput = ({activities}: { activities: Activity[] }) => {
-    const [checkedActivities, addActivities, filterActivities] = useArrayState<Activity>([])
+	const [checkedActivities, addActivities, filterActivities] = useArrayState<Activity>([])
 
-    const isActivityChecked = (activity: Activity) => checkedActivities.some(x => x.id == activity.id);
+	const isActivityChecked = (activity: Activity) => checkedActivities.some(x => x.id == activity.id)
 
-    const clickBadge = (activity: Activity) => {
-        if (checkedActivities.some(x => x.id == activity.id)) {
-            filterActivities(x => x.id != activity.id)
-        } else {
-            addActivities(activity)
-        }
-    }
+	const clickBadge = (activity: Activity) => {
+		if (checkedActivities.some(x => x.id == activity.id)) {
+			filterActivities(x => x.id != activity.id)
+		} else {
+			addActivities(activity)
+		}
+	}
 
-    return <ActivitySelectContainer>
-        {activities.map(activity => <>
-            <Badge title={activity.name.ru}
-                   checked={isActivityChecked(activity)}
-                   onClick={() => clickBadge(activity)}/>
-        </>)}
-    </ActivitySelectContainer>
+	return <ActivitySelectContainer>
+		{activities.map(activity => <>
+			<Badge title={activity.name.ru}
+				checked={isActivityChecked(activity)}
+				onClick={() => clickBadge(activity)}/>
+		</>)}
+	</ActivitySelectContainer>
 }

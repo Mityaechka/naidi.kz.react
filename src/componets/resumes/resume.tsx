@@ -1,8 +1,8 @@
-import styled, {css} from "styled-components";
-import {theme} from "../../index";
-import {ReactNode} from "react";
+import styled, {css} from 'styled-components'
+import {theme} from '../../index'
+import {ReactNode} from 'react'
 
-const Divider = styled.div`
+export const Divider = styled.div`
   border: 1px solid rgba(32, 32, 32, 0.1);
   margin: 8px 16px;
 `
@@ -50,7 +50,7 @@ const CardContainer = styled.div<{ color?: string, border?: Border }>`
   ${({border}) => borderVariant[border ?? 'none']}
 
   background: #ffffff;
-`;
+`
 
 const CardSectionWrapper = styled.div`
   margin: 10px 24px;
@@ -60,18 +60,18 @@ export type Border = 'left' | 'top' | 'none'
 
 
 const borderVariant: Record<NonNullable<Border>, ReturnType<typeof css>> = {
-    left: css`
+	left: css`
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
       border-left-width: 9px;
     `,
-    top: css`
+	top: css`
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border-top-width: 9px;
     `,
-    none: css``
-};
+	none: css``
+}
 
 const DescriptionRow = styled.div`
   display: flex;
@@ -97,17 +97,17 @@ const DescriptionText = styled.span`
 
 
 export const ResumeComponent = ({border, header, body}: {color?: string, border: Border, header: ReactNode, body: ReactNode}) => {
-    return <CardContainer color={theme.colors.yellow} border={border}>
-        <CardSectionWrapper>
-            {header}
-        </CardSectionWrapper>
+	return <CardContainer color={theme.colors.yellow} border={border}>
+		<CardSectionWrapper>
+			{header}
+		</CardSectionWrapper>
 
-        <Divider/>
+		<Divider/>
 
-        <CardSectionWrapper>
-            {body}
-        </CardSectionWrapper>
+		<CardSectionWrapper>
+			{body}
+		</CardSectionWrapper>
 
-    </CardContainer>
+	</CardContainer>
 }
 

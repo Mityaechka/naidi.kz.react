@@ -1,22 +1,22 @@
-import {useStores} from "../../../store/root-store";
-import {useEffect, useState} from "react";
-import {City, Resume, ResumeState} from "../../../models/data";
-import {ResumeComponent} from "../../../componets/resumes/resume";
-import {OwnerHeader} from "../../../componets/resumes/header/owner-header";
-import {inspect} from "util";
-import styled from "styled-components";
-import {AppButton} from "../../../componets/app-input/app-button";
-import {useNavigate} from "react-router-dom";
-import {OwnerBody} from "../../../componets/resumes/body/owner-body";
-import {device} from "../../../hooks/mediaHook";
-import {Menu, MenuButton, MenuItem} from "@szhsin/react-menu";
-import api from "../../../api";
-import {usePermanentToggle} from "../../../hooks/useToggle";
-import {ModerationResumeRequest, User, UserRole} from "../../../models/user-data";
-import DataTable, {TableColumn} from "react-data-table-component";
-import {localize} from "../../../helpers/localization";
-import {MoreVertical} from "react-feather";
-import moment from "moment/moment";
+import {useStores} from '../../../store/root-store'
+import {useEffect, useState} from 'react'
+import {City, Resume, ResumeState} from '../../../models/data'
+import {ResumeComponent} from '../../../componets/resumes/resume'
+import {HeaderBase} from '../../../componets/resumes/header/header-base'
+import {inspect} from 'util'
+import styled from 'styled-components'
+import {AppButton} from '../../../componets/app-input/app-button'
+import {useNavigate} from 'react-router-dom'
+import {BodyOwner} from '../../../componets/resumes/body/body-owner'
+import {device} from '../../../hooks/mediaHook'
+import {Menu, MenuButton, MenuItem} from '@szhsin/react-menu'
+import api from '../../../api'
+import {usePermanentToggle} from '../../../hooks/useToggle'
+import {ModerationResumeRequest, User, UserRole} from '../../../models/user-data'
+import DataTable, {TableColumn} from 'react-data-table-component'
+import {localize} from '../../../helpers/localization'
+import {MoreVertical} from 'react-feather'
+import moment from 'moment/moment'
 
 
 const ComponentContainer = styled.div`
@@ -31,50 +31,50 @@ const RequestsWrapper = styled.div`
 `
 
 export const ModerationResumeView = () => {
-    const navigation = useNavigate()
-    const {cache, app, modal} = useStores()
+	const navigation = useNavigate()
+	const {cache, app, modal} = useStores()
 
 
-    app.setSection("moderation-resumes")
+	app.setSection('moderation-resumes')
 
-    const [requests, setResumeRequests] = useState<ModerationResumeRequest[]>([])
-
-
-    useEffect(() => {
-        updateAllResumeRequests();
-    }, [])
-
-    const updateAllResumeRequests = () => {
-        api.moderator.getResumeRequests().then(resumesResult => {
-            if (!resumesResult.isSuccess) {
-                return
-            }
-
-            setResumeRequests(resumesResult.result!)
-        })
-    }
-
-    const columns: TableColumn<ModerationResumeRequest>[] = [
-        {
-            name: 'Работа',
-            selector: row => localize(row.resume.activity.name),
-        },
-        {
-            name: 'Время создания',
-            selector: row => moment(row.createdAt).format('DD.MM.yyyy HH:mm'),
-        },
-        {
-            name: '',
-            selector: row => row.id,
-            cell: row => <AppButton fullWidth={false} color="yellow" click={() => navigation(`/admin/moderation/resumes/${row.id}`)}>Проверить</AppButton>
-        }
-    ]
+	const [requests, setResumeRequests] = useState<ModerationResumeRequest[]>([])
 
 
-    return <ComponentContainer>
-        <DataTable data={requests}
-                   columns={columns}/>
+	useEffect(() => {
+		updateAllResumeRequests()
+	}, [])
+
+	const updateAllResumeRequests = () => {
+		api.moderator.getResumeRequests().then(resumesResult => {
+			if (!resumesResult.isSuccess) {
+				return
+			}
+
+			setResumeRequests(resumesResult.result!)
+		})
+	}
+
+	const columns: TableColumn<ModerationResumeRequest>[] = [
+		{
+			name: 'Работа',
+			selector: row => localize(row.resume.activity.name),
+		},
+		{
+			name: 'Время создания',
+			selector: row => moment(row.createdAt).format('DD.MM.yyyy HH:mm'),
+		},
+		{
+			name: '',
+			selector: row => row.id,
+			cell: row => <AppButton fullWidth={false} color="yellow" click={() => navigation(`/admin/moderation/resumes/${row.id}`)}>Проверить</AppButton>
+		}
+	]
 
 
-    </ComponentContainer>
+	return <ComponentContainer>
+		<DataTable data={requests}
+			columns={columns}/>
+
+
+	</ComponentContainer>
 }

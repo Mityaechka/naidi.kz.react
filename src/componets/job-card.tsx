@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import Logo from '../assets/magnum-test.png'
 
-import {MapPin, DollarSign} from 'react-feather';
+import {MapPin, DollarSign} from 'react-feather'
 
 export enum Size {
     Small,
@@ -73,32 +73,32 @@ const CompanyName = styled.span`
   align-items: center;
 `
 export const JobCard = ({size = Size.Small}: { size?: Size }) => {
-    return <>
-        <JobContainer size={size}>
-            <JobWrapper>
-                <TitleContainer>
-                    <Title>Уборщик помещений на полный день</Title>
-                    <TitleIcon src={Logo}/>
-                </TitleContainer>
+	return <>
+		<JobContainer size={size}>
+			<JobWrapper>
+				<TitleContainer>
+					<Title>Уборщик помещений на полный день</Title>
+					<TitleIcon src={Logo}/>
+				</TitleContainer>
 
-                <DescriptionWrapper>
-                    <DescriptionContainer>
-                        <DollarSign className="w-14"/>
-                        <DescriptionText>130 000 тг/мес</DescriptionText>
-                    </DescriptionContainer>
+				<DescriptionWrapper>
+					<DescriptionContainer>
+						<DollarSign className="w-14"/>
+						<DescriptionText>130 000 тг/мес</DescriptionText>
+					</DescriptionContainer>
 
-                    <DescriptionContainer>
-                        <MapPin className="w-14"/>
-                        <DescriptionText>Есильский р-н, г. Нур-Султан</DescriptionText>
-                    </DescriptionContainer>
-                </DescriptionWrapper>
+					<DescriptionContainer>
+						<MapPin className="w-14"/>
+						<DescriptionText>Есильский р-н, г. Нур-Султан</DescriptionText>
+					</DescriptionContainer>
+				</DescriptionWrapper>
 
-                <CompanyContainer>
-                    <CompanyName>
+				<CompanyContainer>
+					<CompanyName>
                         Микрофинансовая организация Lending and Financy technologies
-                    </CompanyName>
-                </CompanyContainer>
-            </JobWrapper>
-        </JobContainer>
-    </>
+					</CompanyName>
+				</CompanyContainer>
+			</JobWrapper>
+		</JobContainer>
+	</>
 }

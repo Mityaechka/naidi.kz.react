@@ -1,24 +1,24 @@
-import {useStores} from "../../store/root-store";
-import {MobileLayout} from "./mobile-layout";
-import {MobileBar} from "../mobile-bar";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {useMedia} from "../../hooks/mediaHook";
-import styled from "styled-components";
-import {AppInput} from "../app-input/app-input";
-import {useRouteChange} from "../../hooks/useRouteChange";
-import {ProfileListItem} from "../profile-list-item";
-import Logo from "../../assets/logo.png"
-import {observe} from "mobx";
-import {observer} from "mobx-react";
+import {useStores} from '../../store/root-store'
+import {MobileLayout} from './mobile-layout'
+import {MobileBar} from '../mobile-bar'
+import {Outlet, useLocation, useNavigate} from 'react-router-dom'
+import {useMedia} from '../../hooks/mediaHook'
+import styled from 'styled-components'
+import {AppInput} from '../app-input/app-input'
+import {useRouteChange} from '../../hooks/useRouteChange'
+import {ProfileListItem} from '../profile-list-item'
+import Logo from '../../assets/logo.png'
+import {observe} from 'mobx'
+import {observer} from 'mobx-react'
 
 export const ClientProfileLayout = observer(() => {
-    const media = useMedia()
+	const media = useMedia()
 
-    if (media.isMobile) {
-        return <MobileProfileLayout/>
-    }
+	if (media.isMobile) {
+		return <MobileProfileLayout/>
+	}
 
-    return <DesktopProfileLayout/>
+	return <DesktopProfileLayout/>
 })
 
 const LayoutContainer = styled.div`
@@ -76,46 +76,46 @@ const LogoImg = styled.img`
 `
 
 const DesktopProfileLayout = observer(() => {
-    const navigator = useNavigate()
-    const {app} = useStores()
+	const navigator = useNavigate()
+	const {app} = useStores()
 
-    const back = () => {
-        navigator(-1)
-    }
-    const [location] = useRouteChange();
+	const back = () => {
+		navigator(-1)
+	}
+	const [location] = useRouteChange()
 
-    return <>
-        <LayoutContainer>
-            <NavbarContainer>
-                <LogoImg src={Logo} onClick={() => navigator("/")}/>
-            </NavbarContainer>
-            <LayoutContentContainer>
-                <ListWrapper>
-                    <ProfileListItem click={() => navigator("/client/profile")} title="Мои данные"
-                                     bold={app.section == "my-profile"}/>
+	return <>
+		<LayoutContainer>
+			<NavbarContainer>
+				<LogoImg src={Logo} onClick={() => navigator('/')}/>
+			</NavbarContainer>
+			<LayoutContentContainer>
+				<ListWrapper>
+					<ProfileListItem click={() => navigator('/client/profile')} title="Мои данные"
+						bold={app.section == 'my-profile'}/>
 
-                    <ProfileListItem click={() => navigator("/client/resumes")} title="Мои резюме"
-                                     bold={app.section == "my-resumes"}/>
-                </ListWrapper>
-                <ContentWrapper><Outlet/></ContentWrapper>
-            </LayoutContentContainer>
+					<ProfileListItem click={() => navigator('/client/resumes')} title="Мои резюме"
+						bold={app.section == 'my-resumes'}/>
+				</ListWrapper>
+				<ContentWrapper><Outlet/></ContentWrapper>
+			</LayoutContentContainer>
 
 
-        </LayoutContainer>
-    </>
+		</LayoutContainer>
+	</>
 })
 
 const MobileProfileLayout = observer(() => {
-    const {app} = useStores()
-    const navigator = useNavigate()
-    const back = () => {
-        navigator(-1)
-    }
+	const {app} = useStores()
+	const navigator = useNavigate()
+	const back = () => {
+		navigator(-1)
+	}
 
-    return <MobileLayoutContainer>
-        <MobileBar title={app.title} backClick={back} menuItems={app.pageMenuItems}/>
-        <MobileContentWrapper>
-            <Outlet/>
-        </MobileContentWrapper>
-    </MobileLayoutContainer>
+	return <MobileLayoutContainer>
+		<MobileBar title={app.title} backClick={back} menuItems={app.pageMenuItems}/>
+		<MobileContentWrapper>
+			<Outlet/>
+		</MobileContentWrapper>
+	</MobileLayoutContainer>
 })

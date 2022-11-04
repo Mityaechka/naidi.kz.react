@@ -1,15 +1,15 @@
-import {useStores} from "../../store/root-store";
-import {Navigate, Outlet, useNavigate} from "react-router-dom";
-import styled from "styled-components";
-import {useRouteChange} from "../../hooks/useRouteChange";
-import {ProfileListItem} from "../profile-list-item";
-import Logo from "../../assets/logo.png"
-import {observer} from "mobx-react";
-import {Only} from "../roles/RoleContext";
-import {UserRole} from "../../models/user-data";
-import {useEffect, useState} from "react";
-import {LoadingSpinner} from "../loading-spinner";
-import api from "../../api";
+import {useStores} from '../../store/root-store'
+import {Navigate, Outlet, useNavigate} from 'react-router-dom'
+import styled from 'styled-components'
+import {useRouteChange} from '../../hooks/useRouteChange'
+import {ProfileListItem} from '../profile-list-item'
+import Logo from '../../assets/logo.png'
+import {observer} from 'mobx-react'
+import {Only} from '../roles/RoleContext'
+import {UserRole} from '../../models/user-data'
+import {useEffect, useState} from 'react'
+import {LoadingSpinner} from '../loading-spinner'
+import api from '../../api'
 
 const LayoutContainer = styled.div`
   margin: 0 10px;
@@ -51,55 +51,55 @@ const LogoImg = styled.img`
 `
 
 export const AdminLayout = observer(() => {
-    const navigator = useNavigate()
-    const {app, user} = useStores()
+	const navigator = useNavigate()
+	const {app, user} = useStores()
 
-    const [isAuth, setAuth] = useState<boolean | undefined>(undefined)
+	const [isAuth, setAuth] = useState<boolean | undefined>(undefined)
 
-    const [location] = useRouteChange();
+	const [location] = useRouteChange()
 
-    useEffect(() => {
-        api.admin.getAuthUser().then(result => {
-            if (!result.isSuccess) {
-                setAuth(false)
-                return
-            }
+	useEffect(() => {
+		api.admin.getAuthUser().then(result => {
+			if (!result.isSuccess) {
+				setAuth(false)
+				return
+			}
 
-            setAuth(true)
-            user.setUser(result.result)
-        })
-    }, [])
-
-
-    if (isAuth == undefined) {
-        return <LoadingSpinner/>
-    }
-
-    if (!isAuth) {
-        return <Navigate to='/admin-auth'/>
-    }
+			setAuth(true)
+			user.setUser(result.result)
+		})
+	}, [])
 
 
-    return <>
-        <LayoutContainer>
-            <NavbarContainer>
-                <LogoImg src={Logo} onClick={() => navigator("/")}/>
-            </NavbarContainer>
-            <LayoutContentContainer>
-                <ListWrapper>
-                    <Only to={UserRole.Moderator}>
-                        <ProfileListItem click={() => navigator("/admin/moderation/resumes")} title="Модерация резюме"
-                                         bold={app.section == "moderation-resumes"}/>
-                    </Only>
+	if (isAuth == undefined) {
+		return <LoadingSpinner/>
+	}
 
-                    <Only to={UserRole.Admin}>
-                        <ProfileListItem click={() => navigator("/admin/users")}
-                                         title="Пользователи"
-                                         bold={app.section == "moderation-users"}/>
-                    </Only>
-                </ListWrapper>
-                <ContentWrapper><Outlet/></ContentWrapper>
-            </LayoutContentContainer>
-        </LayoutContainer>
-    </>
+	if (!isAuth) {
+		return <Navigate to='/admin-auth'/>
+	}
+
+
+	return <>
+		<LayoutContainer>
+			<NavbarContainer>
+				<LogoImg src={Logo} onClick={() => navigator('/')}/>
+			</NavbarContainer>
+			<LayoutContentContainer>
+				<ListWrapper>
+					<Only to={UserRole.Moderator}>
+						<ProfileListItem click={() => navigator('/admin/moderation/resumes')} title="Модерация резюме"
+							bold={app.section == 'moderation-resumes'}/>
+					</Only>
+
+					<Only to={UserRole.Admin}>
+						<ProfileListItem click={() => navigator('/admin/users')}
+							title="Пользователи"
+							bold={app.section == 'moderation-users'}/>
+					</Only>
+				</ListWrapper>
+				<ContentWrapper><Outlet/></ContentWrapper>
+			</LayoutContentContainer>
+		</LayoutContainer>
+	</>
 })

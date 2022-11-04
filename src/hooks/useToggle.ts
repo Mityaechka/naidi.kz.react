@@ -1,9 +1,9 @@
-import {useState} from "react";
+import {useState} from 'react'
 
 export const usePermanentToggle = <T>(defaultValue: T, finalValue: T) => {
-    const [value, setValue] = useState(defaultValue)
+	const [value, setValue] = useState(defaultValue)
 
-    const toggle = () => setValue(finalValue)
+	const toggle = () => setValue(finalValue)
 
-    return [value, toggle]
+	return [value, toggle]
 }

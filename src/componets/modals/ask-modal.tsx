@@ -1,27 +1,27 @@
-import {Styles} from "react-modal";
-import {ModalStore} from "../../store/modal-store";
-import {AppButton} from "../app-input/app-button";
-import {AlertTriangle} from "react-feather";
-import styled from "styled-components";
-import {useStores} from "../../store/root-store";
+import {Styles} from 'react-modal'
+import {ModalStore} from '../../store/modal-store'
+import {AppButton} from '../app-input/app-button'
+import {AlertTriangle} from 'react-feather'
+import styled from 'styled-components'
+import {useStores} from '../../store/root-store'
 
 const alertStyle: Styles = {
-    content: {
-        display: "flex",
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: "300px",
-        minHeight: "300px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        paddingBottom: "40px",
-        borderRadius: "8px"
-    },
-};
+	content: {
+		display: 'flex',
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)',
+		width: '300px',
+		minHeight: '300px',
+		paddingLeft: '40px',
+		paddingRight: '40px',
+		paddingBottom: '40px',
+		borderRadius: '8px'
+	},
+}
 
 const AlertIconWrapper = styled.div`
   width: 55px;
@@ -53,17 +53,17 @@ const AlertTitle = styled.span`
 `
 
 const AlertModal = ({title}: { title: string }) => {
-    const {modal} = useStores()
+	const {modal} = useStores()
 
-    return <>
-        <AlertContainer>
-            <AlertIconWrapper><AlertIcon color="white"/></AlertIconWrapper>
-            <AlertTitle>{title}</AlertTitle>
-            <AppButton color="black" click={() => modal.hideModal()}>Ок</AppButton>
-        </AlertContainer>
-    </>
+	return <>
+		<AlertContainer>
+			<AlertIconWrapper><AlertIcon color="white"/></AlertIconWrapper>
+			<AlertTitle>{title}</AlertTitle>
+			<AppButton color="black" click={() => modal.hideModal()}>Ок</AppButton>
+		</AlertContainer>
+	</>
 }
 
 export const showAsk = (modal: ModalStore, title: string) => {
-    modal.showModal(<AlertModal title={title}/>, alertStyle)
+	modal.showModal(<AlertModal title={title}/>, alertStyle)
 }

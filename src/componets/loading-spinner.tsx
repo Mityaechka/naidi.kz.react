@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   left: 0;
@@ -42,11 +42,11 @@ const Spinner = styled.div`
   }
 `
 export const LoadingSpinner = () => {
-    return (
-       <Wrapper>
-           <Container>
-               <Spinner/>
-           </Container>
-       </Wrapper>
-    );
+	return (
+		<Wrapper>
+			<Container>
+				<Spinner/>
+			</Container>
+		</Wrapper>
+	)
 }

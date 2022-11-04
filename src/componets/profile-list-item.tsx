@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import {Action} from "../pages/client/auth";
-import {ArrowRight} from "react-feather";
+import styled from 'styled-components'
+import {Action} from '../pages/client/auth'
+import {ArrowRight} from 'react-feather'
 
 
 const ListItemWrapper = styled.div`
@@ -36,19 +36,19 @@ const ListItemBadge = styled.span`
 `
 
 export const ProfileListItem = ({
-                                    click,
-                                    title,
-                                    badge = undefined,
-                                    bold = false
-                                }: { click: Action, title: string, badge?: string, bold?: boolean }) => <>
-    <div>
-        <ListItemWrapper onClick={click}>
-            <ListItemTitle bold={bold}>
-                {title}
-                {badge && <ListItemBadge>{badge}</ListItemBadge>}
-            </ListItemTitle>
-            <ArrowRight/>
-        </ListItemWrapper>
-        <Line/>
-    </div>
+	click,
+	title,
+	badge = undefined,
+	bold = false
+}: { click: Action, title: string, badge?: string, bold?: boolean }) => <>
+	<div>
+		<ListItemWrapper onClick={click}>
+			<ListItemTitle bold={bold}>
+				{title}
+				{badge && <ListItemBadge>{badge}</ListItemBadge>}
+			</ListItemTitle>
+			<ArrowRight/>
+		</ListItemWrapper>
+		<Line/>
+	</div>
 </>

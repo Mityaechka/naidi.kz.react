@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import PlusIcon from "../assets/icons/plusicon.png"
-import CheckmarkIcon from "../assets/icons/checkmark-icon.png"
+import PlusIcon from '../assets/icons/plusicon.png'
+import CheckmarkIcon from '../assets/icons/checkmark-icon.png'
 
-import { Plus, Check } from 'react-feather';
+import { Plus, Check } from 'react-feather'
 
-const checkedColor = "#F9CF21"
-const uncheckedColor = "#DCDCDC"
+const checkedColor = '#F9CF21'
+const uncheckedColor = '#DCDCDC'
 
 const BadgeContainer = styled.div<{checked: boolean}>`
   overflow: unset;
@@ -18,7 +18,7 @@ const BadgeContainer = styled.div<{checked: boolean}>`
 
   align-items: center;
   justify-content: center;
-`;
+`
 
 
 const BadgeTitle = styled.span`
@@ -33,15 +33,15 @@ const BadgeTitle = styled.span`
 
 
 export const Badge = ({title, checked, onClick}: { title: string, checked: boolean, onClick?: () => void }) => {
-    return <BadgeContainer checked={checked} onClick={onClick}>
-        <>
-            {checked && <Check className="badge-icon"/>}
-            {!checked && <Plus className="badge-icon"/>}
+	return <BadgeContainer checked={checked} onClick={onClick}>
+		<>
+			{checked && <Check className="badge-icon"/>}
+			{!checked && <Plus className="badge-icon"/>}
 
-            <BadgeTitle>{title}</BadgeTitle>
+			<BadgeTitle>{title}</BadgeTitle>
 
-        </>
-    </BadgeContainer>
+		</>
+	</BadgeContainer>
 
 
 }

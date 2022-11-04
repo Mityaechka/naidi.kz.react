@@ -1,18 +1,18 @@
-import {AppButton} from "../../componets/app-input/app-button";
-import {observer} from "mobx-react";
-import {useEffect} from "react";
-import styled from "styled-components";
+import {AppButton} from '../../componets/app-input/app-button'
+import {observer} from 'mobx-react'
+import {useEffect} from 'react'
+import styled from 'styled-components'
 
-import Logo from "../../assets/logo.png"
-import {useNavigate} from "react-router-dom";
-import {Activity} from "../../models/data";
-import {ActivitySelectInput} from "../../componets/app-input/activity-select-input";
-import {JobCard, Size} from "../../componets/job-card";
-import {AppInput} from "../../componets/app-input/app-input";
-import {Mail} from "react-feather"
-import {device, useMedia} from "../../hooks/mediaHook";
-import {useStores} from "../../store/root-store";
-import {ModalAuthWizard} from "../../wizards/ModalAuthWizard";
+import Logo from '../../assets/logo.png'
+import {useNavigate} from 'react-router-dom'
+import {Activity} from '../../models/data'
+import {ActivitySelectInput} from '../../componets/app-input/activity-select-input'
+import {JobCard, Size} from '../../componets/job-card'
+import {AppInput} from '../../componets/app-input/app-input'
+import {Mail} from 'react-feather'
+import {device, useMedia} from '../../hooks/mediaHook'
+import {useStores} from '../../store/root-store'
+import {ModalAuthWizard} from '../../wizards/ModalAuthWizard'
 
 const PageWrapper = styled.div`
   margin-top: 9px;
@@ -38,16 +38,16 @@ const AppBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
+`
 
 const AppBarLogo = styled.img`
   height: 70px;
-`;
+`
 
 const TitleWrapper = styled.div`
   margin-top: 23px;
   margin-bottom: 16px;
-`;
+`
 
 const Title = styled.p`
   font-weight: 700;
@@ -68,7 +68,7 @@ const Title = styled.p`
     line-height: 75px;
   }
 
-`;
+`
 
 const TitleDescription = styled.p`
   font-style: normal;
@@ -89,7 +89,7 @@ const TitleDescription = styled.p`
     line-height: 42px;
   }
 
-`;
+`
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -107,7 +107,7 @@ const ButtonsContainer = styled.div`
 `
 
 const BadgeContainer = styled.div`
-`;
+`
 
 const BadgeTitle = styled.p`
   font-weight: 700;
@@ -196,202 +196,202 @@ const JobTitle = styled.p`
 
 
 export const MainPage = observer(() => {
-    const {app, client, modal} = useStores()
-    const {isTabletOrDesktop, isMobile} = useMedia()
-    const activities: Activity[] = [
-        {
-            name: {
-                ru: "Электромонтажник",
-                kz: "Электромонтажник"
-            },
-            id: "1"
-        },
-        {
-            name: {
-                ru: "Водитель",
-                kz: "Водитель"
-            },
-            id: "2"
-        },
-        {
-            name: {
-                ru: "Няня",
-                kz: "Няня"
-            },
-            id: "3"
-        },
-        {
-            name: {
-                ru: "Продавец",
-                kz: "Продавец"
-            },
-            id: "4"
-        },
-        {
-            name: {
-                ru: "Оператор",
-                kz: "Оператор"
-            },
-            id: "5"
-        },
-        // {name: "Продавец", id: "2"},
-        // {name: "Няня", id: "3"},
-        // {name: "Механик", id: "4"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
-        // {name: "Водитель", id: "5"},
+	const {app, client, modal} = useStores()
+	const {isTabletOrDesktop, isMobile} = useMedia()
+	const activities: Activity[] = [
+		{
+			name: {
+				ru: 'Электромонтажник',
+				kz: 'Электромонтажник'
+			},
+			id: '1'
+		},
+		{
+			name: {
+				ru: 'Водитель',
+				kz: 'Водитель'
+			},
+			id: '2'
+		},
+		{
+			name: {
+				ru: 'Няня',
+				kz: 'Няня'
+			},
+			id: '3'
+		},
+		{
+			name: {
+				ru: 'Продавец',
+				kz: 'Продавец'
+			},
+			id: '4'
+		},
+		{
+			name: {
+				ru: 'Оператор',
+				kz: 'Оператор'
+			},
+			id: '5'
+		},
+		// {name: "Продавец", id: "2"},
+		// {name: "Няня", id: "3"},
+		// {name: "Механик", id: "4"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
+		// {name: "Водитель", id: "5"},
 
-    ]
-
-
-    const navigator = useNavigate();
-
-    app.setTitle("Главаня страница");
-
-    const openAuth = () => {
-        if (isMobile) {
-            navigator("/auth")
-            return
-        }
-
-        const wizard = ModalAuthWizard({modalStore: modal});
-
-        wizard()
-
-    }
-
-    const openProfile = () => navigator("/client")
+	]
 
 
-    return <PageWrapper>
-        <AppBar>
-            <AppBarLogo src={Logo}/>
-            <div>
-                {!client.isAuth && <AppButton color="black" fullWidth={false} click={openAuth}>Войти</AppButton>}
+	const navigator = useNavigate()
 
-                {client.isAuth && <AppButton color="yellow" fullWidth={false} click={openProfile}>Профиль</AppButton>}
+	app.setTitle('Главаня страница')
 
-            </div>
-        </AppBar>
+	const openAuth = () => {
+		if (isMobile) {
+			navigator('/auth')
+			return
+		}
 
-        <TitleWrapper>
-            <Title>
+		const wizard = ModalAuthWizard({modalStore: modal})
+
+		wizard()
+
+	}
+
+	const openProfile = () => navigator('/client')
+
+
+	return <PageWrapper>
+		<AppBar>
+			<AppBarLogo src={Logo}/>
+			<div>
+				{!client.isAuth && <AppButton color="black" fullWidth={false} click={openAuth}>Войти</AppButton>}
+
+				{client.isAuth && <AppButton color="yellow" fullWidth={false} click={openProfile}>Профиль</AppButton>}
+
+			</div>
+		</AppBar>
+
+		<TitleWrapper>
+			<Title>
                 Найди работу легко!
-            </Title>
-            <TitleDescription>
+			</Title>
+			<TitleDescription>
                 Заполни анкету за 1 минуту
-            </TitleDescription>
-        </TitleWrapper>
+			</TitleDescription>
+		</TitleWrapper>
 
-        <ButtonsContainer>
-            <AppButton color="yellow" fullWidth={false}>Найди работу</AppButton>
-            <AppButton color="yellow" fullWidth={false}>Найди работника</AppButton>
-        </ButtonsContainer>
+		<ButtonsContainer>
+			<AppButton color="yellow" fullWidth={false} click={() => navigator("/search/resumes")}>Найди работу</AppButton>
+			<AppButton color="yellow" fullWidth={false}>Найди работника</AppButton>
+		</ButtonsContainer>
 
-        <SearchContainer>
-            <AppInput field="activitySearch" placeholder="Поиск работы"/>
-        </SearchContainer>
+		<SearchContainer>
+			<AppInput field="activitySearch" placeholder="Поиск работы"/>
+		</SearchContainer>
 
-        <BadgeContainer>
-            <BadgeTitle>Популярные запросы</BadgeTitle>
-            <ActivitySelectInput activities={activities}></ActivitySelectInput>
+		<BadgeContainer>
+			<BadgeTitle>Популярные запросы</BadgeTitle>
+			<ActivitySelectInput activities={activities}></ActivitySelectInput>
 
-        </BadgeContainer>
+		</BadgeContainer>
 
-        {/*<ResumesContainer>*/}
-        {/*    <ResumesTitle>*/}
-        {/*        ГОРЯЧИЕ ВАКАНСИИ*/}
-        {/*    </ResumesTitle>*/}
-        {/*    <ResumesWrapper>*/}
-        {/*        ВАКАНСИИИ*/}
-        {/*    </ResumesWrapper>*/}
-        {/*</ResumesContainer>*/}
+		{/*<ResumesContainer>*/}
+		{/*    <ResumesTitle>*/}
+		{/*        ГОРЯЧИЕ ВАКАНСИИ*/}
+		{/*    </ResumesTitle>*/}
+		{/*    <ResumesWrapper>*/}
+		{/*        ВАКАНСИИИ*/}
+		{/*    </ResumesWrapper>*/}
+		{/*</ResumesContainer>*/}
 
-        <JobContainer>
-            <JobTitle>Найди работу</JobTitle>
-            <JobWrapper>
-                <JobCardsContainer>
-                    <JobCard size={Size.Full}/>
-                    <JobCard size={Size.Full}/>
-                    <JobCard size={Size.Full}/>
-                    <JobCard size={Size.Full}/>
-                    <JobCard size={Size.Full}/>
-                    <JobCard size={Size.Full}/>
-                </JobCardsContainer>
-            </JobWrapper>
+		<JobContainer>
+			<JobTitle>Найди работу</JobTitle>
+			<JobWrapper>
+				<JobCardsContainer>
+					<JobCard size={Size.Full}/>
+					<JobCard size={Size.Full}/>
+					<JobCard size={Size.Full}/>
+					<JobCard size={Size.Full}/>
+					<JobCard size={Size.Full}/>
+					<JobCard size={Size.Full}/>
+				</JobCardsContainer>
+			</JobWrapper>
 
 
-        </JobContainer>
-        <ListAreaContainer>
-            <ListContainer>
-                <ListTitle>Для поиска работы</ListTitle>
-                <ListWrapper>
-                    <ListItem>
-                        <ListCounter>1</ListCounter>
-                        <ListText>Заполни анкету за 1 минуту</ListText>
-                    </ListItem>
+		</JobContainer>
+		<ListAreaContainer>
+			<ListContainer>
+				<ListTitle>Для поиска работы</ListTitle>
+				<ListWrapper>
+					<ListItem>
+						<ListCounter>1</ListCounter>
+						<ListText>Заполни анкету за 1 минуту</ListText>
+					</ListItem>
 
-                    <ListItem>
-                        <ListCounter>2</ListCounter>
-                        <ListText>Откликайтесь на интересующие объявления</ListText>
-                    </ListItem>
+					<ListItem>
+						<ListCounter>2</ListCounter>
+						<ListText>Откликайтесь на интересующие объявления</ListText>
+					</ListItem>
 
-                    <ListItem>
-                        <ListCounter>3</ListCounter>
-                        <ListText>Отвечайте на звонки и сообщения в WhatsApp </ListText>
-                    </ListItem>
-                </ListWrapper>
+					<ListItem>
+						<ListCounter>3</ListCounter>
+						<ListText>Отвечайте на звонки и сообщения в WhatsApp </ListText>
+					</ListItem>
+				</ListWrapper>
 
-                <ListButtonContainer>
-                    <AppButton color="yellow" fullWidth={false}>Найди работу</AppButton>
-                </ListButtonContainer>
-            </ListContainer>
+				<ListButtonContainer>
+					<AppButton color="yellow" fullWidth={false} click={() => navigator("/search/resumes")}>Найди работу</AppButton>
+				</ListButtonContainer>
+			</ListContainer>
 
-            <ListContainer>
-                <ListTitle>Для поиска работника</ListTitle>
-                <ListWrapper>
-                    <ListItem>
-                        <ListCounter>1</ListCounter>
-                        <ListText>Разместите бесплатное объявление</ListText>
-                    </ListItem>
+			<ListContainer>
+				<ListTitle>Для поиска работника</ListTitle>
+				<ListWrapper>
+					<ListItem>
+						<ListCounter>1</ListCounter>
+						<ListText>Разместите бесплатное объявление</ListText>
+					</ListItem>
 
-                    <ListItem>
-                        <ListCounter>2</ListCounter>
-                        <ListText>Изучите анкеты кандидатов</ListText>
-                    </ListItem>
+					<ListItem>
+						<ListCounter>2</ListCounter>
+						<ListText>Изучите анкеты кандидатов</ListText>
+					</ListItem>
 
-                    <ListItem>
-                        <ListCounter>3</ListCounter>
-                        <ListText>Свяжитесь с теми, кто вам приглянется</ListText>
-                    </ListItem>
-                </ListWrapper>
-                <ListButtonContainer>
-                    <AppButton color="yellow" fullWidth={false}>Найди работника</AppButton>
-                </ListButtonContainer>
-            </ListContainer>
-        </ListAreaContainer>
-        <MailContainer>
-            <MailTitle>Оставьте свой email и получайте новые объявления</MailTitle>
+					<ListItem>
+						<ListCounter>3</ListCounter>
+						<ListText>Свяжитесь с теми, кто вам приглянется</ListText>
+					</ListItem>
+				</ListWrapper>
+				<ListButtonContainer>
+					<AppButton color="yellow" fullWidth={false}>Найди работника</AppButton>
+				</ListButtonContainer>
+			</ListContainer>
+		</ListAreaContainer>
+		<MailContainer>
+			<MailTitle>Оставьте свой email и получайте новые объявления</MailTitle>
 
-            <AppInput field="mail" placeholder="ivanov@gmail.com" icon={<Mail className="input-icon"/>}/>
-            <MailButtonWrapper><AppButton fullWidth={!isTabletOrDesktop}>Отправить</AppButton></MailButtonWrapper>
+			<AppInput field="mail" placeholder="ivanov@gmail.com" icon={<Mail className="input-icon"/>}/>
+			<MailButtonWrapper><AppButton fullWidth={!isTabletOrDesktop}>Отправить</AppButton></MailButtonWrapper>
 
-        </MailContainer>
-    </PageWrapper>
+		</MailContainer>
+	</PageWrapper>
 })
 
 const MailContainer = styled.div`

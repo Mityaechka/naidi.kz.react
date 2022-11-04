@@ -1,11 +1,11 @@
-import {Action} from "../pages/client/auth";
-import {ArrowLeft, Icon, IconProps, MoreVertical} from "react-feather";
-import {FC, ReactNode} from "react";
-import {AppIconButton} from "./app-input/app-button";
-import CloseIcon from "../assets/icons/close-btn-icon.png";
-import {Menu} from "@szhsin/react-menu";
-import styled from "styled-components";
-import {PopupMenu, PopupMenuItem} from "./popup-menu/popup-menu";
+import {Action} from '../pages/client/auth'
+import {ArrowLeft, Icon, IconProps, MoreVertical} from 'react-feather'
+import {FC, ReactNode} from 'react'
+import {AppIconButton} from './app-input/app-button'
+import CloseIcon from '../assets/icons/close-btn-icon.png'
+import {Menu} from '@szhsin/react-menu'
+import styled from 'styled-components'
+import {PopupMenu, PopupMenuItem} from './popup-menu/popup-menu'
 
 const MobileBarContainer = styled.div`
     margin: 0;
@@ -40,26 +40,26 @@ const MobileBarTitle = styled.h1`
 
 
 export const MobileBar = ({
-                              title,
-                              backClick = undefined,
-                              menuItems
-                          }: { title: string, backClick?: Action, menuItems?: PopupMenuItem[] }) => {
+	title,
+	backClick = undefined,
+	menuItems
+}: { title: string, backClick?: Action, menuItems?: PopupMenuItem[] }) => {
+	let a
+	return <MobileBarContainer>
+		<ButtonContainer>
+			<AppIconButton click={backClick} icon={<ArrowLeft/>}/>
+		</ButtonContainer>
 
-    return <MobileBarContainer>
-        <ButtonContainer>
-            <AppIconButton click={backClick} icon={<ArrowLeft/>}/>
-        </ButtonContainer>
-
-        <MobileBarTitle>{title}</MobileBarTitle>
+		<MobileBarTitle>{title}</MobileBarTitle>
 
 
-        <ButtonContainer>
-            {menuItems &&
+		<ButtonContainer>
+			{menuItems &&
                 <PopupMenu items={menuItems}/>
-            }
-        </ButtonContainer>
+			}
+		</ButtonContainer>
 
-    </MobileBarContainer>
+	</MobileBarContainer>
 }
 
 

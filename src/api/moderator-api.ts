@@ -1,7 +1,7 @@
-import api from "./index";
-import {apiMethods} from "./api-methods";
-import {ModerationResumeRequest, RejectReason} from "../models/user-data";
-import {Localized} from "../models/data";
+import api from './index'
+import {apiMethods} from './api-methods'
+import {ModerationResumeRequest, RejectReason} from '../models/user-data'
+import {Localized} from '../models/data'
 
 export type ApproveData = {
     description?: Localized
@@ -16,8 +16,8 @@ const approveRequest = (resumeId: string, data: ApproveData) => apiMethods.post(
 const rejectRequest = (resumeId: string, data: RejectData) => apiMethods.post(`api/admin/moderator/resumes/${resumeId}/reject`, data)
 
 export const moderatorApi = {
-    getResumeRequests: getResumeRequests,
-    getResumeRequest: getResumeRequest,
-    approveRequest: approveRequest,
-    rejectRequest: rejectRequest
+	getResumeRequests: getResumeRequests,
+	getResumeRequest: getResumeRequest,
+	approveRequest: approveRequest,
+	rejectRequest: rejectRequest
 }

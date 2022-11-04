@@ -1,5 +1,5 @@
-import 'styled-components';
-import {theme} from "../index";
+import 'styled-components'
+import {theme} from '../index'
 
 interface IPalette {
     main: string
@@ -17,5 +17,5 @@ declare module 'styled-components' {
         m24: string,
         m16: string,
         m8: string,
-    };
+    }
 }
