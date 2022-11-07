@@ -8,14 +8,14 @@ import styled from 'styled-components'
 import {PopupMenu, PopupMenuItem} from './popup-menu/popup-menu'
 
 const MobileBarContainer = styled.div`
-    margin: 0;
-    padding: 0;
-    display: flex;
-    height: 56px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 56px;
 
-    background: #FFFFFF;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
-    border-radius: 0px 0px 8px 8px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 0px 0px 8px 8px;
 `
 
 const ButtonContainer = styled.div`
@@ -38,28 +38,36 @@ const MobileBarTitle = styled.h1`
 `
 
 
-
 export const MobileBar = ({
-	title,
-	backClick = undefined,
-	menuItems
-}: { title: string, backClick?: Action, menuItems?: PopupMenuItem[] }) => {
-	let a
-	return <MobileBarContainer>
-		<ButtonContainer>
-			<AppIconButton click={backClick} icon={<ArrowLeft/>}/>
-		</ButtonContainer>
+                              title,
+                              backClick = undefined,
+                              menuItems
+                          }: { title: string, backClick?: Action, menuItems?: PopupMenuItem[] }) => {
+    let a
+    return <MobileBarContainer>
+        <ButtonContainer>
+            <AppIconButton click={backClick} icon={<ArrowLeft/>}/>
+        </ButtonContainer>
 
-		<MobileBarTitle>{title}</MobileBarTitle>
+        <MobileBarTitle>{title}</MobileBarTitle>
 
 
-		<ButtonContainer>
-			{menuItems &&
+        <ButtonContainer>
+            {menuItems &&
                 <PopupMenu items={menuItems}/>
-			}
-		</ButtonContainer>
+            }
+        </ButtonContainer>
 
-	</MobileBarContainer>
+    </MobileBarContainer>
 }
 
 
+export const MobileBarExtension = ({
+                                       children
+                                   }: { children: ReactNode }) => {
+
+    return <MobileBarContainer>
+        {children}
+
+    </MobileBarContainer>
+}

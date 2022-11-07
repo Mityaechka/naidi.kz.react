@@ -276,6 +276,8 @@ export const MainPage = observer(() => {
 
 	const openProfile = () => navigator('/client')
 
+	const findResumes = () => navigator("/search/resumes")
+
 
 	return <PageWrapper>
 		<AppBar>
@@ -298,8 +300,8 @@ export const MainPage = observer(() => {
 		</TitleWrapper>
 
 		<ButtonsContainer>
-			<AppButton color="yellow" fullWidth={false} click={() => navigator("/search/resumes")}>Найди работу</AppButton>
-			<AppButton color="yellow" fullWidth={false}>Найди работника</AppButton>
+			<AppButton color="yellow" fullWidth={false}>Найди работу</AppButton>
+			<AppButton color="yellow" fullWidth={false} click={findResumes}>Найди работника</AppButton>
 		</ButtonsContainer>
 
 		<SearchContainer>
@@ -380,7 +382,7 @@ export const MainPage = observer(() => {
 					</ListItem>
 				</ListWrapper>
 				<ListButtonContainer>
-					<AppButton color="yellow" fullWidth={false}>Найди работника</AppButton>
+					<AppButton color="yellow" fullWidth={false} click={findResumes}>Найди работника</AppButton>
 				</ListButtonContainer>
 			</ListContainer>
 		</ListAreaContainer>
